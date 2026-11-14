@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Soku | ロゴ・名刺・チラシ・Webのデザイン事務所</title>
-<meta name="description" content="ロゴ・名刺・チラシ・Webのデザイン事務所。料金はすべて公開し、方向が決まってから最短3日で入稿データをお渡しします。">
+<title>Soku | トータルデザインの制作会社</title>
+<meta name="description" content="トータルデザインの制作会社。料金はすべて公開し、方向が決まってから最短3日で入稿データをお渡しします。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet">
@@ -139,6 +139,7 @@ h2{font-weight:300;font-size:clamp(24px,2.9vw,42px);line-height:1.7;letter-spaci
 /* works: one project at a time, pinned */
 .works{height:calc(100svh + 250vh);min-height:0;padding:0;display:block;margin-top:-100svh}
 .pin{position:sticky;top:0;height:100svh;overflow:hidden}
+.wsnap{position:absolute;left:0;width:1px;height:1px;pointer-events:none}
 .pin .lab{position:absolute;left:var(--px);top:15vh;font-size:12px;letter-spacing:.06em;display:flex;gap:12px;align-items:center;z-index:2}
 .pin .lab b{font-weight:300;padding:8px 18px;border-radius:99px;background:rgba(28,29,33,.05);border:1px solid rgba(28,29,33,.12)}
 .wintro{flex:none;width:min(22em,26vw);align-self:center;font-size:13px;line-height:2.1;color:#52555d}
@@ -321,10 +322,15 @@ h2{font-weight:300;font-size:clamp(24px,2.9vw,42px);line-height:1.7;letter-spaci
   .slip,.ctw{position:static}
   #cart{height:250px}
   /* 3D の上に乗る文字は、すりガラスの面に置く */
-  section.dk .col,section.flow .fs{position:relative;padding:30px 22px 32px;margin-left:-8px;margin-right:-8px;background:rgba(44,45,50,.95);border:1px solid rgba(255,255,255,.07);border-radius:16px}
+  section.dk .col,section.flow .fs{position:relative;padding:30px 22px 32px;margin-left:-8px;margin-right:-8px;background:rgba(66,68,75,.96);border:1px solid rgba(255,255,255,.12);border-radius:16px;box-shadow:0 18px 40px rgba(0,0,0,.18)}
   section.dk .col .lead,section.dk .col .soku{border-top-color:rgba(160,163,170,.3)}
   section.dk{justify-content:flex-end}
   .svc{min-height:138svh}
+  html{scroll-snap-type:y proximity}
+  .hero{scroll-snap-align:start}
+  section.dk .col,section.flow .fs,#est>div>.ctw,.faq{scroll-snap-align:start;scroll-margin-top:76px}
+  section.ct .col{scroll-snap-align:center}
+  .wsnap{position:absolute;left:0;width:1px;height:1px;scroll-snap-align:start;pointer-events:none}
   .q button{padding:15px 0;font-size:14px}
   .q p{font-size:13px;line-height:1.9}
   .q.open p{padding-bottom:16px}
@@ -334,7 +340,7 @@ h2{font-weight:300;font-size:clamp(24px,2.9vw,42px);line-height:1.7;letter-spaci
   .tile .pr{font-size:17px;margin-top:6px}
   .ct .cact{margin-top:36px;gap:12px}
   .ct .btn{margin-top:0}
-  .ct{min-height:100svh;padding-bottom:8vh}
+  .ct{min-height:100svh;padding-bottom:14vh}
   #labels span{font-size:10px}
   .flow{min-height:0;padding-bottom:10vh}
   .flow .fs{position:relative;top:auto;height:auto;margin-top:46vh}
@@ -372,7 +378,7 @@ h2{font-weight:300;font-size:clamp(24px,2.9vw,42px);line-height:1.7;letter-spaci
 <section class="hero" data-th="l">
   <div class="stick">
     <div class="wm" id="wm"><span>S</span><span>o</span><span>k</span><span>u</span></div>
-    <p class="eb">ロゴ・名刺・チラシ・Webのデザイン事務所</p>
+    <p class="eb">トータルデザインの制作会社</p>
     <h1>品質に妥協せず、<br><span class="ty" id="ty">速さ</span><i class="caret"></i>の次元を変える。</h1>
     <p class="hl"><span>1回5案、最大15案。</span><br><span>方向が決まってから、</span><span>最短3日で入稿データをお渡しします。</span></p>
     <div class="hcta"><a class="btn onLight sm" href="#est">料金を見る<i></i></a><a class="tl" href="#" data-f="doc">資料請求</a></div>
@@ -816,7 +822,10 @@ function resize(){
   narrow=W/H<1.1||W<900;camera.aspect=W/H;lastVX=-1;camera.clearViewOffset();camera.updateProjectionMatrix();measure();
 }
 const TG={span:0,c:[]};let worksP=0;
-function measureTrack(){TG.span=Math.max(0,track.scrollWidth-innerWidth);TG.c=slides.map(el=>el.offsetLeft+el.offsetWidth*.5)}
+function measureTrack(){TG.span=Math.max(0,track.scrollWidth-innerWidth);TG.c=slides.map(el=>el.offsetLeft+el.offsetWidth*.5);
+ const tot=Math.max(1,worksEl.offsetHeight-innerHeight),m=slides.length;let mk=worksEl.querySelectorAll('.wsnap');
+ if(mk.length!==m+1){mk.forEach(e=>e.remove());for(let k=0;k<=m;k++){const d=document.createElement('i');d.className='wsnap';worksEl.appendChild(d)}mk=worksEl.querySelectorAll('.wsnap')}
+ mk.forEach((d,k)=>{const P=Math.min(1,(k+.12)/(m*1.04));d.style.top=Math.round(P*tot)+'px'})}
 addEventListener('resize',()=>setTimeout(measureTrack,50));track.querySelectorAll('img').forEach(im=>im.addEventListener('load',measureTrack));
 addEventListener('resize',resize);resize();measureTrack();addEventListener('load',measureTrack);
 addEventListener('load',()=>{measure();setTimeout(measure,800)});
