@@ -1,0 +1,22 @@
+# 公開するのは LP に必要なものだけ
+/*
+!/.gitignore
+!/README.md
+!/index.html
+!/legal.html
+!/privacy.html
+!/three.min.js
+!/works/
+/works/*
+!/works/roume-flyer.jpg
+!/works/roume-t1.png
+!/works/roume-t2.jpg
+!/works/roume-t3.jpg
+!/works/tanne-web1.jpg
+!/works/tanne-t1.png
+!/works/tanne-t2.jpg
+!/works/tanne-t3.jpg
+!/works/trns-tee.jpg
+!/works/trns-t1.png
+!/works/trns-t2.jpg
+!/works/trns-t3.jpg
