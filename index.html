@@ -326,11 +326,7 @@ h2{font-weight:300;font-size:clamp(24px,2.9vw,42px);line-height:1.7;letter-spaci
   section.dk .col .lead,section.dk .col .soku{border-top-color:rgba(160,163,170,.3)}
   section.dk{justify-content:flex-end}
   .svc{min-height:138svh}
-  html{scroll-snap-type:y proximity}
-  .hero{scroll-snap-align:start}
-  section.dk .col,section.flow .fs,#est>div>.ctw,.faq{scroll-snap-align:start;scroll-margin-top:76px}
-  section.ct .col{scroll-snap-align:center}
-  .wsnap{position:absolute;left:0;width:1px;height:1px;scroll-snap-align:start;pointer-events:none}
+
   .q button{padding:15px 0;font-size:14px}
   .q p{font-size:13px;line-height:1.9}
   .q.open p{padding-bottom:16px}
@@ -827,6 +823,11 @@ function measureTrack(){TG.span=Math.max(0,track.scrollWidth-innerWidth);TG.c=sl
  if(mk.length!==m+1){mk.forEach(e=>e.remove());for(let k=0;k<=m;k++){const d=document.createElement('i');d.className='wsnap';worksEl.appendChild(d)}mk=worksEl.querySelectorAll('.wsnap')}
  mk.forEach((d,k)=>{const P=Math.min(1,(k+.12)/(m*1.04));d.style.top=Math.round(P*tot)+'px'})}
 addEventListener('resize',()=>setTimeout(measureTrack,50));track.querySelectorAll('img').forEach(im=>im.addEventListener('load',measureTrack));
+function fitEnd(){const ct=document.getElementById('contact'),col=ct&&ct.querySelector('.col'),sm=ct&&ct.querySelector('.small');if(!col)return;
+ if(innerWidth>900){ct.style.paddingBottom='';return}
+ ct.style.paddingBottom='0px';const below=ct.getBoundingClientRect().bottom-col.getBoundingClientRect().bottom;
+ ct.style.paddingBottom=Math.max(24,innerHeight/2-col.offsetHeight/2-below)+'px'}
+addEventListener('resize',fitEnd);addEventListener('load',fitEnd);setTimeout(fitEnd,600);
 addEventListener('resize',resize);resize();measureTrack();addEventListener('load',measureTrack);
 addEventListener('load',()=>{measure();setTimeout(measure,800)});
 let mx=0,my=0,tmx=0,tmy=0;
