@@ -763,7 +763,7 @@ const hm=new THREE.MeshBasicMaterial({color:0xeef0f2,transparent:true,opacity:0}
 const moonO=new THREE.Group();moonO.rotation.set(.35,0,-.3);halo.add(moonO);
 const moon=new THREE.Mesh(new THREE.SphereGeometry(.2,28,20),mk());moonO.add(moon);
 const cartEl=document.getElementById('cart');const svcCol=document.querySelector('#svc .col');const baseP=new THREE.Vector3(),tgtP=new THREE.Vector3(),qI=new THREE.Quaternion();
-let raised=false,gateOn=false,handT=0,prevTS=0;
+let raised=false,gateOn=false,handT=0,prevTS=0,fpS=0;
 
 const io3=k=>k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2;
 const cl=(v)=>Math.min(1,Math.max(0,v)),ramp=(t,a,b)=>cl((t-a)/(b-a)),ss=v=>v*v*(3-2*v);
@@ -954,7 +954,8 @@ function frame(now){
   /* three days */
   const rw=ss(ramp(tS,5.85,6.12))*(1-ss(ramp(tS,7.2,7.5)));
   if(rw>.01){ring.visible=true;let fp=cl((tS-6.02)/.62);
-    let kN=0;if(narrow&&RSTEP){RSTEP.forEach((t,i)=>{if(t<H*.72)kN=i+1});fp=cl(kN/3)}
+    let kN=0;if(narrow&&RSTEP){let sum=0;RSTEP.forEach((t,i)=>{const g=cl((H*.86-t)/(H*.3));sum+=g;if(g>.5)kN=i+1});fp=cl(sum/3)}
+    fpS+=(fp-fpS)*smooth(7,dt);fp=fpS;
     arcs.forEach((m,i)=>{m.material.opacity=rw*(.16+.84*ss(cl(fp*3-i)))});
     const ma=Math.PI/2-fp*Math.PI*2;marker.position.set(Math.cos(ma)*RAD,Math.sin(ma)*RAD,0);marker.material.opacity=rw;
     const st=narrow?Math.max(0,kN-1):Math.min(2,Math.floor(fp*3+.001));if(st!==lastStep){steps.forEach((s,i)=>s.classList.toggle('on',i<=st));lastStep=st}
