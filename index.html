@@ -76,7 +76,7 @@ h2{font-weight:300;font-size:clamp(24px,2.9vw,42px);line-height:1.7;letter-spaci
 .hero p.hl span{display:inline-block}
 .hero p.eb{margin:0 0 18px;font-size:12.5px;letter-spacing:.12em;color:#3f4249;display:flex;align-items:center;gap:12px;animation-delay:.75s}
 .hero p.eb:before{content:"";width:28px;height:1px;background:currentColor;opacity:.6}
-.hero .ty{display:inline-block;min-width:2em}
+.hero .ty{display:inline}
 .hero .caret{display:inline-block;width:2px;height:.95em;margin:0 .08em 0 .04em;vertical-align:-.1em;background:currentColor;animation:blink 1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
 .hcta{display:flex;align-items:center;gap:28px;margin-top:30px;opacity:0;animation:fadeup 1.4s var(--e) 1.3s forwards}
@@ -183,8 +183,6 @@ h2{font-weight:300;font-size:clamp(24px,2.9vw,42px);line-height:1.7;letter-spaci
 .lg p{font-size:12.5px;color:#a6a9b1;letter-spacing:.04em;line-height:1.8}
 /* estimate: pick, and a slip prints */
 .ctw{position:sticky;top:84px}
-.ctot{display:none}
-@media (max-width:900px){.ctot{display:block}}
 #cart{width:100%;height:min(64vh,560px);display:block}
 .est .wrap{display:grid;grid-template-columns:minmax(300px,420px) 340px minmax(300px,480px);gap:clamp(32px,6vw,110px);margin-top:56px;align-items:start;justify-content:space-between;max-width:1380px}
 .gk{font-family:var(--serif);font-size:13px;color:var(--sub);margin:0 0 10px}
@@ -331,11 +329,7 @@ h2{font-weight:300;font-size:clamp(24px,2.9vw,42px);line-height:1.7;letter-spaci
   .q p{font-size:13px;line-height:1.9}
   .q.open p{padding-bottom:16px}
   .fl p{margin:10px 0 14px}
-  .est .wrap{margin-top:28px}
-  .est .wrap .ctw{position:sticky;top:60px;z-index:3;margin:0 calc(var(--px) * -1) 6px;padding:0 var(--px);background:linear-gradient(180deg,rgba(225,226,229,.97) 78%,rgba(225,226,229,0))}
-  .est .wrap #cart{height:170px}
-  .ctot{position:absolute;right:var(--px);bottom:18px;text-align:right;font-size:11px;color:#52555d;letter-spacing:.06em}
-  .ctot b{display:block;font-family:var(--serif);font-weight:400;font-size:26px;color:var(--ink);letter-spacing:-.01em}
+  #est>div>.ctw{margin:-4vh 0 28px}
   .tile{padding:13px 14px 12px}
   .tile .pr{font-size:17px;margin-top:6px}
   .ct .cact{margin-top:36px;gap:12px}
@@ -454,7 +448,7 @@ h2{font-weight:300;font-size:clamp(24px,2.9vw,42px);line-height:1.7;letter-spaci
         <a class="tl ask" href="#" data-f="talk">先に相談したい</a>
         <p class="fine">金額は税別です。パッケージ・グッズなどは、ご相談のうえお見積もりします。</p>
       </aside>
-      <div class="ctw reveal d2"><canvas id="cart"></canvas><div class="ctot"><span>合計(税別)</span><b id="tot2">¥30,000</b></div></div>
+      <div class="ctw reveal d2"><canvas id="cart"></canvas></div>
     </div>
     <details class="src reveal">
       <summary>「一般的な相場」の出典</summary>
@@ -550,7 +544,7 @@ function calc(){
  const all=[...one,...mo.map(i=>({...i,mo:1}))];
  document.getElementById('rows').innerHTML=all.length?all.map(i=>`<li${prev.has(i.id)?' style="animation:none"':''}><span>${i.n}</span><span>${yen(i.p)}${i.mo?' /月':''}</span></li>`).join(''):'<li class="emp"><span>項目を選んでください</span><span></span></li>';
  prev=new Set(all.map(i=>i.id));
- tween('tot',tot,document.getElementById('tot'));{const t2=document.getElementById('tot2');if(t2)t2.textContent=yen(tot)+(moT?' +月'+yen(moT):'')}tween('cm',cm,document.getElementById('cm'));
+ tween('tot',tot,document.getElementById('tot'));tween('cm',cm,document.getElementById('cm'));
  document.getElementById('mo').textContent=moT?`+ ${yen(moT)} / 月`:'';
  document.getElementById('df').textContent=cm?`相場との差 − ${yen(cm-cs)}`:'';
  document.getElementById('dy').textContent=all.length?'最短 3 日':'—';
@@ -644,7 +638,7 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 calc();
 /* スマホでは、天体が落ちてくるカートを料金の章の先頭に置く */
 (function(){const ctw=document.querySelector('.ctw'),home=ctw.parentNode,next=ctw.nextSibling,inner=document.querySelector('#est>div');
- function place(){const n=innerWidth<=900;if(n){if(home.firstChild!==ctw)home.insertBefore(ctw,home.firstChild)}else if(ctw.parentNode!==home||ctw.nextSibling!==next)home.insertBefore(ctw,next)}
+ function place(){const n=innerWidth<=900;if(n&&ctw.parentNode!==inner)inner.insertBefore(ctw,inner.firstChild);else if(!n&&ctw.parentNode!==home)home.insertBefore(ctw,next)}
  place();addEventListener('resize',place)})();
 (function(){
  if(matchMedia('(prefers-reduced-motion:reduce)').matches||matchMedia('(pointer:coarse)').matches)return;
@@ -861,7 +855,7 @@ function frame(now){
   covers.forEach((c,i)=>{const b=RC[i];
     const isW=c===worksEl;
     let p=isW?cl((H*.35-b.top)/(H*1.25)):cl((H-b.top)/(H*(narrow?.62:1.3)));
-    if(!nextIsCover[i])p=Math.min(p,narrow?cl((b.bottom-H*.04)/(H*.32)):cl((b.bottom-H*.1)/(H*.75)));
+    if(!nextIsCover[i])p=Math.min(p,narrow?cl((b.bottom-H*.05)/(H*.55)):cl((b.bottom-H*.1)/(H*.75)));
     p=ss(p);
     const pv=isW?ss(cl((p-.15)/.85)):ss(cl((p-(narrow?.25:.55))/(narrow?.75:.45)));if(isW)worksP=pv;
     const pk=Math.round(pv*1000);if(c.__pk!==pk){c.__pk=pk;c.style.setProperty('--p',(pk/1000).toFixed(3))}
@@ -926,7 +920,8 @@ function frame(now){
     tgtP.y-=world.position.y;baseP.copy(tgtP)}
   solid.position.copy(baseP);
   solid.rotation.set(reduce?.35+my*.45*heroL:.35+Math.sin(now*.00023)*.12+my*.45*heroL,reduce?mx*.75*heroL:now*.00016+mx*.75*heroL+spin*8+tS*1.4,reduce?.12-mx*.12*heroL:.12+Math.sin(now*.00031)*.06*heroL-mx*.12*heroL);
-  U.k.value=kv;U.s.value=size*(1-.72*hand)*(1-gone);
+  const regrow=tS<5.45?1:ss(ramp(tS,5.5,5.88));
+  U.k.value=kv;U.s.value=size*(1-.72*hand)*(1-gone)*regrow;
   U.t.value=tt;U.w.value=life*(reduce?.6:1);
   qI.copy(solid.quaternion).invert();U.m.value.set(mx,-my,.75).normalize().applyQuaternion(qI);
   const rz=(tS>4.9&&tS<5.42)||(narrow&&handT>.001&&handT<.999);if(rz!==raised){raised=rz;canvas.style.zIndex=rz?3:1}
