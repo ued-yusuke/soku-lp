@@ -382,7 +382,8 @@ h2.nw{white-space:nowrap}
     <label>お名前<input name="name" autocomplete="name" required></label>
     <label>メールアドレス<input name="email" type="email" autocomplete="email" required></label>
     <label class="fmsg">ご相談内容(任意)<textarea name="message" rows="3"></textarea></label>
-    <label class="fck"><input type="checkbox" name="optin" required><span>資料の送付と、Soku からのご案内メールの受け取りに同意します。<a href="privacy.html" target="_blank">プライバシーポリシー</a></span></label>
+    <label class="fck"><input type="checkbox" name="optin" required><span><span id="fck">資料の送付と、Soku からのご案内メールの受け取りに同意します。</span><a href="terms.html" target="_blank" id="fterms" style="display:none">ご利用規約</a> <a href="privacy.html" target="_blank">プライバシーポリシー</a></span></label>
+    <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none">
     <input type="hidden" name="kind"><input type="hidden" name="items">
     <button type="submit" class="btn onLight fgo"><span id="fbtn">資料を受け取る</span><i></i></button>
     <p class="ferr" id="ferr"></p>
@@ -507,7 +508,7 @@ h2.nw{white-space:nowrap}
         <div class="q reveal"><button>何案見られますか。<i></i></button><div><p>1回5案、3回までご提案します。それでも決まらない場合は、半額を返金して終了となります。</p></div></div>
         <div class="q reveal"><button>AIっぽくなりませんか。<i></i></button><div><p>AIを使うのは案出しまでです。形を選び、線や文字を仕上げるのはデザイナーです。</p></div></div>
         <div class="q reveal"><button>ロゴの権利はどうなりますか。<i></i></button><div><p>お支払いの完了後にお譲りします。商標の調査と出願は含みません。</p></div></div>
-        <div class="q reveal"><button>支払いはいつですか。<i></i></button><div><p>ご注文時の前払いです。</p></div></div>
+        <div class="q reveal"><button>支払いはいつですか。<i></i></button><div><p>ご注文時の前払いです。クレジットカードか銀行振込でお支払いいただけます。</p></div></div>
         <div class="q reveal"><button>どんなデータで届きますか。<i></i></button><div><p>入稿データ、画像データ、ロゴの使い方ガイドをお渡しします。</p></div></div>
       </div>
     </div>
@@ -537,7 +538,7 @@ h2.nw{white-space:nowrap}
   <div class="cact reveal d2"><a class="btn onDark" href="#" id="talk" data-f="talk">相談する<i></i></a><a class="btn onDark ghost" href="#" id="doc" data-f="doc">資料請求<i></i></a></div>
   <div class="sel" id="sel"></div>
   </div>
-  <div class="small">運営 上田裕介(名古屋)　<a href="legal.html">特定商取引法に基づく表記</a>　<a href="privacy.html">プライバシーポリシー</a>　© Soku</div>
+  <div class="small">運営 上田裕介(名古屋)　<a href="legal.html">特定商取引法に基づく表記</a>　<a href="privacy.html">プライバシーポリシー</a>　<a href="terms.html">ご利用規約</a>　© Soku</div>
 </section>
 
 <script src="three.min.js"></script>
@@ -688,26 +689,36 @@ document.getElementById('qs').addEventListener('click',e=>{const b=e.target.clos
 document.querySelectorAll('[data-k]').forEach(a=>a.addEventListener('click',()=>{const c=document.getElementById(a.dataset.k==='doc'?'doc':'talk');if(!c)return;c.classList.add('pulse');setTimeout(()=>c.classList.remove('pulse'),1600)}));
 /* forms: request the PDF / ask / order (price already fixed) */
 (function(){
- const FORM_ENDPOINT='';   // ← 送信先(Formspree / Google Apps Script / Brevo など)を入れる
+ const FORM_ENDPOINT='https://api.web3forms.com/submit', W3F_KEY='96a315e6-fb56-4a28-a502-8173f9052797';  // Web3Forms(公開してよいキー。受信先 info@soku-design.com)
  const fm=document.getElementById('fm'),ff=document.getElementById('fform'),$=id=>document.getElementById(id);
- const T={doc:{tag:'資料請求',sub:'PDFをメールでお送りします',tt:'サービス資料のご請求',d:'料金、進め方、作例をまとめたPDFです。ご入力いただいたメールアドレスにお送りします。',b:'資料を受け取る',msg:false,done:'メールをご確認ください。',dd:'資料をお送りしました。数分たっても届かない場合は、迷惑メールのフォルダもご確認ください。'},
-  talk:{tag:'ご相談',sub:'メールでお返事します',tt:'ご相談・お問い合わせ',d:'内容を確認し、1営業日以内にメールでお返事します。打ち合わせが必要な場合は、こちらから日程をご案内します。',b:'送信する',msg:true,done:'送信しました。',dd:'1営業日以内に、メールでお返事します。'},
-  order:{tag:'お申し込み',sub:'この内容で進めます',tt:'お申し込み',d:'お支払いのご案内とヒアリングシートを、メールでお送りします。お支払いの確認後に、ヒアリングから始めます。',b:'申し込む',msg:true,done:'お申し込みを受け付けました。',dd:'お支払いのご案内とヒアリングシートを、メールでお送りします。'}};
+ const T={doc:{tag:'資料請求',sub:'PDFをメールでお送りします',tt:'サービス資料のご請求',d:'料金、進め方、作例をまとめたPDFです。ご入力いただいたメールアドレスにお送りします。',b:'資料を受け取る',msg:false,ck:'資料の送付と、Soku からのご案内メールの受け取りに同意します。',done:'ご請求を受け付けました。',dd:'1営業日以内に、info@soku-design.com から資料をお送りします。届かない場合は、迷惑メールのフォルダもご確認ください。'},
+  talk:{tag:'ご相談',sub:'メールでお返事します',tt:'ご相談・お問い合わせ',d:'内容を確認し、1営業日以内にメールでお返事します。打ち合わせが必要な場合は、こちらから日程をご案内します。',b:'送信する',msg:true,ck:'個人情報の取り扱いに同意します。',done:'送信しました。',dd:'1営業日以内に、メールでお返事します。'},
+  order:{tag:'お申し込み',sub:'この内容で進めます',tt:'お申し込み',d:'お支払いのご案内とヒアリングシートを、メールでお送りします。お支払いの確認後に、ヒアリングから始めます。',b:'申し込む',msg:true,ck:'ご利用規約と、個人情報の取り扱いに同意します。',done:'お申し込みを受け付けました。',dd:'お支払いのご案内とヒアリングシートを、メールでお送りします。'}};
  function open(k){const t=T[k];fm.classList.remove('done');$('ftag').textContent=t.tag;$('fsub').textContent=t.sub;$('ftt').textContent=t.tt;$('fdesc').textContent=t.d;$('fbtn').textContent=t.b;
   ff.querySelector('.fmsg').style.display=t.msg?'':'none';ff.kind.value=k;$('ferr').textContent='';
   const items=(document.getElementById('sel').textContent||'').replace(/^選択中:\s*/,'');ff.items.value=k==='doc'?'':items;
   $('fsum').textContent=(k==='order'&&items)?'選んだ内容: '+items:'';
-  $('fdt').textContent=t.done;$('fdd').textContent=t.dd;
+  $('fck').textContent=t.ck;$('fterms').style.display=k==='order'?'':'none';$('fdt').textContent=t.done;$('fdd').textContent=t.dd;
   fm.classList.add('open');fm.setAttribute('aria-hidden','false');setTimeout(()=>ff.name.focus(),300)}
  function close(){fm.classList.remove('open');fm.setAttribute('aria-hidden','true')}
  document.addEventListener('click',e=>{const a=e.target.closest('[data-f]');if(a){e.preventDefault();open(a.dataset.f)}if(e.target.closest('[data-x]'))close()});
  addEventListener('keydown',e=>{if(e.key==='Escape')close()});
  ff.addEventListener('submit',async e=>{e.preventDefault();const err=$('ferr');
   if(!ff.name.value.trim()||!/^\S+@\S+\.\S+$/.test(ff.email.value)){err.textContent='お名前とメールアドレスを入力してください。';return}
-  if(!ff.optin.checked){err.textContent='受け取りの同意にチェックを入れてください。';return}
+  if(!ff.optin.checked){err.textContent='同意の欄にチェックを入れてください。';return}
   err.textContent='';
-  try{if(FORM_ENDPOINT){const r=await fetch(FORM_ENDPOINT,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(ff)});if(!r.ok)throw 0}
-   fm.classList.add('done');ff.reset()}catch(_){err.textContent='送信できませんでした。時間をおいて、もう一度お試しください。'}});
+  const btn=ff.querySelector('.fgo');btn.disabled=true;
+  try{const k=ff.kind.value,L={doc:'資料請求',talk:'ご相談',order:'お申し込み'}[k]||k,nm=ff.name.value.trim(),em=ff.email.value.trim();
+   // Web3Forms は日本語の項目名が文字化けするので、項目は name/email/message の3つだけにし、中身を日本語で組む
+   const body=['■ 種類: '+L,'■ お名前: '+nm+' 様','■ メール: '+em];
+   if(ff.items.value)body.push('■ 選んだ内容: '+ff.items.value);
+   if(k!=='doc')body.push('■ ご相談内容:',ff.message.value.trim()||'(記入なし)');
+   if(k==='doc')body.push('','→ 資料(PDF)を返信で送ってください。');
+   const fd=new FormData();fd.append('access_key',W3F_KEY);fd.append('subject','【Soku】'+L+' '+nm+' 様');fd.append('from_name','Soku LP');
+   fd.append('name',nm);fd.append('email',em);fd.append('message',body.join('\n'));if(ff.botcheck.checked)fd.append('botcheck','on');
+   const r=await fetch(FORM_ENDPOINT,{method:'POST',headers:{'Accept':'application/json'},body:fd}),j=await r.json().catch(()=>({}));if(!r.ok||j.success===false)throw 0;
+   fm.classList.add('done');ff.reset()}catch(_){err.textContent='送信できませんでした。時間をおいて、もう一度お試しいただくか、info@soku-design.com へ直接ご連絡ください。'}
+  btn.disabled=false});
 })();
 /* 「速さ」と「価格」を打ち替える */
 (function(){const el=document.getElementById('ty');if(!el)return;
