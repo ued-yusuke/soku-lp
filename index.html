@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- アクセス解析(Google アナリティクス 4・プロパティ「Soku」) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-02K8NCP27D"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-02K8NCP27D');</script>
 <title>Soku | トータルデザインの制作会社</title>
 <meta name="description" content="トータルデザインの制作会社。料金はすべて公開し、方向が決まってから最短3日で入稿データをお渡しします。">
 <link rel="canonical" href="https://soku-design.com/">
@@ -896,7 +899,7 @@ document.querySelectorAll('[data-k]').forEach(a=>a.addEventListener('click',()=>
   if(btn.classList.contains('snd'))return ok;
   btn.disabled=!ok;btn.classList.toggle('rdy',ok);hint.classList.toggle('off',ok);if(ok)$('ferr').textContent='';return ok}
  ff.addEventListener('input',check);ff.addEventListener('change',check);
- function open(k){const t=T[k];fm.classList.remove('done');$('ftag').textContent=t.tag;$('fsub').textContent=t.sub;$('ftt').textContent=t.tt;$('fdesc').textContent=t.d;$('fbtn').textContent=t.b;
+ function open(k){try{gtag('event','form_open',{form_kind:k})}catch(_){}const t=T[k];fm.classList.remove('done');$('ftag').textContent=t.tag;$('fsub').textContent=t.sub;$('ftt').textContent=t.tt;$('fdesc').textContent=t.d;$('fbtn').textContent=t.b;
   ff.querySelector('.fmsg').style.display=t.msg?'':'none';ff.kind.value=k;$('ferr').textContent='';
   const items=(document.getElementById('sel').textContent||'').replace(/^選択中:\s*/,'');ff.items.value=k==='doc'?'':items;
   $('fsum').textContent=(k==='order'&&items)?'選んだ内容: '+items:'';
@@ -926,6 +929,7 @@ document.querySelectorAll('[data-k]').forEach(a=>a.addEventListener('click',()=>
   await new Promise(r=>setTimeout(r,Math.max(0,900-(performance.now()-t0))));
   btn.classList.remove('snd');
   if(!sent){err.textContent='送信できませんでした。時間をおいて、もう一度お試しいただくか、info@soku-design.com へ直接ご連絡ください。';check();return}
+  try{gtag('event','generate_lead',{form_kind:k})}catch(_){}
   const t=T[k];$('fdt').textContent=mailed?t.done:(k==='doc'?'ご請求を受け付けました。':t.done);$('fdto').textContent=em+' 宛て';$('fdd').textContent=mailed?t.dd:t.late;
   fm.classList.add('done');ff.reset();check()});
 })();
