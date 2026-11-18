@@ -130,15 +130,68 @@ h2{font-weight:500;font-size:clamp(24px,2.9vw,42px);line-height:1.7;letter-spaci
 .fbox label{display:block;font-size:12px;letter-spacing:.06em;color:#52555d;margin-bottom:16px}
 .fbox input:not([type=checkbox]),.fbox textarea{display:block;width:100%;margin-top:6px;padding:12px 14px;border:1px solid rgba(28,29,33,.22);border-radius:4px;background:#fff;font:inherit;font-size:15px;color:var(--ink);letter-spacing:.03em;outline:none;transition:border-color .3s}
 .fbox input:focus,.fbox textarea:focus{border-color:var(--ink)}
-.fck{display:flex!important;gap:10px;align-items:flex-start;line-height:1.8}
-.fck input{margin-top:5px;accent-color:#1c1d21}
-.fgo{width:100%;justify-content:space-between;margin-top:6px}
+.fck{display:flex!important;gap:12px;align-items:flex-start;line-height:1.8;cursor:pointer;margin-bottom:12px!important}
+.fck input{position:absolute;opacity:0;width:1px;height:1px}
+.fck.hid{display:none!important}
+.fck a{color:inherit;text-underline-offset:3px}
+/* チェック: 四角が塗られ、線が引かれる */
+.cb{flex:none;width:20px;height:20px;margin-top:1px;border:1px solid rgba(28,29,33,.4);border-radius:5px;background:#fff;display:grid;place-items:center;transition:background .35s var(--e),border-color .35s var(--e),transform .35s var(--e)}
+.cb svg{width:14px;height:14px;fill:none;stroke:#f1f2f4;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:16;stroke-dashoffset:16;transition:stroke-dashoffset .45s var(--e) .1s}
+.fck input:checked+.cb{background:#1c1d21;border-color:#1c1d21;transform:scale(1.06)}
+.fck input:checked+.cb svg{stroke-dashoffset:0}
+.fck input:focus-visible+.cb{outline:2px solid #1c1d21;outline-offset:2px}
+.fck:hover .cb{border-color:#1c1d21}
+/* 送信ボタン: そろうまでは薄い線だけ。そろうと左から塗られ、矢印の丸が弾む */
+.fgo{width:100%;justify-content:space-between;margin-top:10px;background:none;font-family:inherit;cursor:pointer;transition:color .5s var(--e),opacity .5s var(--e),border-color .5s var(--e)}
+.fgo .fl2{display:grid}
+.fgo .fl2>span{grid-area:1/1;transition:opacity .4s var(--e),transform .5s var(--e)}
+.fgo .fsd{opacity:0;transform:translateY(10px)}
+.fgo:disabled{cursor:default;color:rgba(28,29,33,.42);border-color:rgba(28,29,33,.25)}
+.fgo:disabled:before{transform:scaleX(0)!important}
+.fgo:disabled i{background:rgba(28,29,33,.2)!important;transform:none!important}
+.fgo:disabled i:after{border-color:#eef0f2!important}
+.fgo.rdy{color:var(--on)}
+.fgo.rdy:before{transform:scaleX(1)}
+.fgo.rdy i{background:var(--on);animation:fpop .7s var(--e)}
+.fgo.rdy i:after{border-color:var(--fill)}
+.fgo.rdy:hover i{transform:translateX(3px)}
+@keyframes fpop{0%{transform:scale(.6)}55%{transform:scale(1.14)}100%{transform:scale(1)}}
+.fgo.snd{pointer-events:none}
+.fgo.snd #fbtn{opacity:0;transform:translateY(-10px)}
+.fgo.snd .fsd{opacity:1;transform:none}
+.fgo.snd i{animation:none}
+.fgo.snd i:after{width:16px;height:16px;border-radius:50%;border:1.5px solid rgba(28,29,33,.2);border-top-color:#1c1d21;transform:none;animation:fspin .8s linear infinite}
+@keyframes fspin{to{transform:rotate(360deg)}}
+.fhint{font-size:11.5px;color:#7b7e86;letter-spacing:.04em;margin-top:10px;transition:opacity .4s var(--e),max-height .4s var(--e);max-height:24px;overflow:hidden}
+.fhint.off{opacity:0;max-height:0;margin-top:0}
 .ferr{min-height:20px;margin-top:10px;font-size:12px;color:#8a3b3b}
 .fx{position:absolute;right:18px;top:18px;width:34px;height:34px;border:0;background:transparent;cursor:pointer}
 .fx:before,.fx:after{content:"";position:absolute;left:9px;right:9px;top:16px;height:1px;background:var(--ink);transform:rotate(45deg)}
 .fx:after{transform:rotate(-45deg)}
 .fdone{display:none}
 #fm.done #fform{display:none}#fm.done .fdone{display:block}
+/* 完了: 封筒が左からすべり込み、丸にチェックが引かれる */
+.fsent{display:block;width:120px;height:84px;margin:4px 0 20px;fill:none;stroke:#1c1d21;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.fsent .env{opacity:0;transform:translateX(-46px)}
+.fsent .l1,.fsent .l2,.fsent .l3{stroke-dasharray:16;stroke-dashoffset:16;opacity:.5}
+.fsent .ok circle{fill:#1c1d21;stroke:none;transform-box:fill-box;transform-origin:center;transform:scale(0)}
+.fsent .ok path{stroke:#f1f2f4;stroke-width:1.8;stroke-dasharray:20;stroke-dashoffset:20}
+#fm.done .fsent .env{animation:fenv 1s var(--e) .15s forwards}
+#fm.done .fsent .l1{animation:fline .9s var(--e) .2s forwards}
+#fm.done .fsent .l2{animation:fline .9s var(--e) .32s forwards}
+#fm.done .fsent .l3{animation:fline .9s var(--e) .44s forwards}
+#fm.done .fsent .ok circle{animation:fokc .6s var(--e) 1s forwards}
+#fm.done .fsent .ok path{animation:fokp .5s var(--e) 1.35s forwards}
+#fm.done .fdone .pill,#fm.done .fdone h3,#fm.done .fdone .fd,#fm.done .fdone .btn{opacity:0;animation:fadeup .9s var(--e) forwards}
+#fm.done .fdone .pill{animation-delay:.5s}#fm.done .fdone h3{animation-delay:.62s}#fm.done .fdone #fdto{animation-delay:.74s}#fm.done .fdone #fdd{animation-delay:.84s}#fm.done .fdone .btn{animation-delay:1s}
+#fdto{margin:10px 0 0;color:#1c1d21;font-weight:500;word-break:break-all}
+#fdto:empty{display:none}
+#fdd{margin-top:6px}
+@keyframes fenv{to{opacity:1;transform:none}}
+@keyframes fline{0%{stroke-dashoffset:16}60%{stroke-dashoffset:0;opacity:.5}100%{stroke-dashoffset:-16;opacity:0}}
+@keyframes fokc{0%{transform:scale(0)}60%{transform:scale(1.15)}100%{transform:scale(1)}}
+@keyframes fokp{to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){.fsent *,#fm.done .fdone *{animation-duration:.01s!important;animation-delay:0s!important}}
 .btn.pulse{box-shadow:0 0 0 0 rgba(238,240,242,.6);animation:pulse 1.4s var(--e)}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(238,240,242,.55)}100%{box-shadow:0 0 0 22px rgba(238,240,242,0)}}
 @keyframes fadeup{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
@@ -493,13 +546,18 @@ body.vdk .hnav .hb:not(.o){background:#eef0f2;color:#1c1d21;border-color:#eef0f2
     <label>お名前<input name="name" autocomplete="name" required></label>
     <label>メールアドレス<input name="email" type="email" autocomplete="email" required></label>
     <label class="fmsg">ご相談内容(任意)<textarea name="message" rows="3"></textarea></label>
-    <label class="fck"><input type="checkbox" name="optin" required><span><span id="fck">資料の送付と、Soku からのご案内メールの受け取りに同意します。</span><a href="terms.html" target="_blank" id="fterms" style="display:none">ご利用規約</a> <a href="privacy.html" target="_blank">プライバシーポリシー</a></span></label>
+    <label class="fck"><input type="checkbox" name="agree" required><i class="cb"><svg viewBox="0 0 16 16"><path d="M3.4 8.5l3 3 6.2-6.8"/></svg></i><span><a href="terms.html" target="_blank" id="fterms" style="display:none">ご利用規約</a><span id="ftand" style="display:none">と</span><a href="privacy.html" target="_blank">プライバシーポリシー</a>に同意します。</span></label>
+    <label class="fck" id="fnews"><input type="checkbox" name="optin"><i class="cb"><svg viewBox="0 0 16 16"><path d="M3.4 8.5l3 3 6.2-6.8"/></svg></i><span>Soku からのお知らせメールも受け取る(任意)</span></label>
     <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none">
     <input type="hidden" name="kind"><input type="hidden" name="items">
-    <button type="submit" class="btn onLight fgo"><span id="fbtn">資料を受け取る</span><i></i></button>
+    <button type="submit" class="btn onLight fgo" disabled><span class="fl2"><span id="fbtn">資料をメールで受け取る</span><span class="fsd">送信しています</span></span><i></i></button>
+    <p class="fhint" id="fhint">お名前、メールアドレス、同意の3つがそろうと送信できます。</p>
     <p class="ferr" id="ferr"></p>
   </form>
-  <div class="fbox fdone" id="fdone"><button type="button" class="fx" data-x aria-label="閉じる"></button><div class="pill"><b>送信しました</b><span>Thank you</span></div><h3 id="fdt">メールをご確認ください。</h3><p class="fd" id="fdd">数分たっても届かない場合は、迷惑メールのフォルダもご確認ください。</p><a class="btn onLight" id="fdl" href="soku-shiryo.pdf" target="_blank" download style="margin-top:22px;display:none">資料をダウンロード<i></i></a></div>
+  <div class="fbox fdone" id="fdone"><button type="button" class="fx" data-x aria-label="閉じる"></button>
+    <svg class="fsent" viewBox="0 0 120 84" aria-hidden="true"><path class="l1" d="M4 54h16"/><path class="l2" d="M0 42h12"/><path class="l3" d="M8 66h10"/><g class="env"><rect x="30" y="20" width="62" height="44" rx="4"/><path d="M31 23l30 23 30-23"/></g><g class="ok"><circle cx="92" cy="22" r="13"/><path d="M86 22.5l4.2 4.2 8-8.6"/></g></svg>
+    <div class="pill"><b>送信しました</b><span>Thank you</span></div><h3 id="fdt">資料をお送りしました。</h3><p class="fd" id="fdto"></p><p class="fd" id="fdd">数分たっても届かない場合は、迷惑メールのフォルダをご確認ください。</p>
+    <button type="button" class="btn onLight" data-x style="margin-top:22px;cursor:pointer;background:none;font-family:inherit">サイトにもどる<i></i></button></div>
 </div>
 <div id="menu"><a href="#works">実績<small>Works</small></a><a href="#svc">サービス<small>Service</small></a><a href="#est">料金<small>Price</small></a><a href="#flow">流れ<small>Flow</small></a><a href="#faq">よくある質問<small>FAQ</small></a><a href="#contact">お問い合わせ<small>Contact</small></a></div>
 
@@ -812,36 +870,53 @@ document.getElementById('qs').addEventListener('click',e=>{const b=e.target.clos
 document.querySelectorAll('[data-k]').forEach(a=>a.addEventListener('click',()=>{const c=document.getElementById(a.dataset.k==='doc'?'doc':'talk');if(!c)return;c.classList.add('pulse');setTimeout(()=>c.classList.remove('pulse'),1600)}));
 /* forms: request the PDF / ask / order (price already fixed) */
 (function(){
+ /* 送り先は2つ。MAIL_ENDPOINT(Google Apps Script・_mail/Code.gs)= お客さんへの自動返信(資料は添付)と、info@ への通知。
+    空のあいだ、または失敗したときは Web3Forms(info@ への通知だけ)に送る。そのときは資料を手で送る必要がある */
+ const MAIL_ENDPOINT='https://script.google.com/macros/s/AKfycbwO386N3juGK3n0aUwqWXi8iPIn6DdK8LkmVlDjM1u3DbOS0Hy8sBYYXU0w0JcoSdKj/exec';
  const FORM_ENDPOINT='https://api.web3forms.com/submit', W3F_KEY='96a315e6-fb56-4a28-a502-8173f9052797';  // Web3Forms(公開してよいキー。受信先 info@soku-design.com)
  const fm=document.getElementById('fm'),ff=document.getElementById('fform'),$=id=>document.getElementById(id);
- const T={doc:{tag:'資料請求',sub:'PDFをすぐにお読みいただけます',tt:'サービス資料のご請求',d:'料金、進め方、作例をまとめたPDF(12ページ)です。送信すると、その場でダウンロードできます。',b:'資料を受け取る',msg:false,ck:'Soku からのご案内メールの受け取りに同意します。',done:'ご請求ありがとうございます。',dd:'下のボタンから、資料をダウンロードできます。'},
-  talk:{tag:'ご相談',sub:'メールでお返事します',tt:'ご相談・お問い合わせ',d:'内容を確認し、1営業日以内にメールでお返事します。打ち合わせが必要な場合は、こちらから日程をご案内します。',b:'送信する',msg:true,ck:'個人情報の取り扱いに同意します。',done:'送信しました。',dd:'1営業日以内に、メールでお返事します。'},
-  order:{tag:'お申し込み',sub:'この内容で進めます',tt:'お申し込み',d:'お支払いのご案内とヒアリングシートを、メールでお送りします。お支払いの確認後に、ヒアリングから始めます。',b:'申し込む',msg:true,ck:'ご利用規約と、個人情報の取り扱いに同意します。',done:'お申し込みを受け付けました。',dd:'お支払いのご案内とヒアリングシートを、メールでお送りします。'}};
+ const T={doc:{tag:'資料請求',sub:'PDFをメールでお送りします',tt:'サービス資料のご請求',d:'料金、進め方、作例をまとめたPDF(14ページ)です。ご入力いただいたメールアドレスにお送りします。',b:'資料をメールで受け取る',msg:false,done:'資料をお送りしました。',dd:'数分たっても届かない場合は、迷惑メールのフォルダをご確認ください。',late:'資料は、1営業日以内にメールでお送りします。'},
+  talk:{tag:'ご相談',sub:'メールでお返事します',tt:'ご相談・お問い合わせ',d:'内容を確認し、1営業日以内にメールでお返事します。打ち合わせが必要な場合は、こちらから日程をご案内します。',b:'送信する',msg:true,done:'お問い合わせを受け付けました。',dd:'1営業日以内に、メールでお返事します。受け付けの控えをお送りしました。',late:'1営業日以内に、メールでお返事します。'},
+  order:{tag:'お申し込み',sub:'この内容で進めます',tt:'お申し込み',d:'お支払いのご案内とヒアリングシートを、メールでお送りします。お支払いの確認後に、ヒアリングから始めます。',b:'申し込む',msg:true,done:'お申し込みを受け付けました。',dd:'お支払いのご案内とヒアリングシートを、1営業日以内にメールでお送りします。受け付けの控えをお送りしました。',late:'お支払いのご案内とヒアリングシートを、1営業日以内にメールでお送りします。'}};
+ const btn=ff.querySelector('.fgo'),hint=$('fhint');
+ const okMail=v=>/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim());
+ /* そろったら送信できる: お名前・メールアドレス・同意 */
+ function check(){const ok=!!ff.name.value.trim()&&okMail(ff.email.value)&&ff.agree.checked;
+  if(btn.classList.contains('snd'))return ok;
+  btn.disabled=!ok;btn.classList.toggle('rdy',ok);hint.classList.toggle('off',ok);if(ok)$('ferr').textContent='';return ok}
+ ff.addEventListener('input',check);ff.addEventListener('change',check);
  function open(k){const t=T[k];fm.classList.remove('done');$('ftag').textContent=t.tag;$('fsub').textContent=t.sub;$('ftt').textContent=t.tt;$('fdesc').textContent=t.d;$('fbtn').textContent=t.b;
   ff.querySelector('.fmsg').style.display=t.msg?'':'none';ff.kind.value=k;$('ferr').textContent='';
   const items=(document.getElementById('sel').textContent||'').replace(/^選択中:\s*/,'');ff.items.value=k==='doc'?'':items;
   $('fsum').textContent=(k==='order'&&items)?'選んだ内容: '+items:'';
-  $('fck').textContent=t.ck;$('fterms').style.display=k==='order'?'':'none';$('fdl').style.display=k==='doc'?'':'none';$('fdt').textContent=t.done;$('fdd').textContent=t.dd;
-  fm.classList.add('open');fm.setAttribute('aria-hidden','false');setTimeout(()=>ff.name.focus(),300)}
+  $('fterms').style.display=$('ftand').style.display=k==='order'?'':'none';$('fnews').classList.toggle('hid',k!=='doc');
+  check();fm.classList.add('open');fm.setAttribute('aria-hidden','false');setTimeout(()=>ff.name.focus(),300)}
  function close(){fm.classList.remove('open');fm.setAttribute('aria-hidden','true')}
  document.addEventListener('click',e=>{const a=e.target.closest('[data-f]');if(a){e.preventDefault();open(a.dataset.f)}if(e.target.closest('[data-x]'))close()});
  addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+ async function post(url,fd){const r=await fetch(url,{method:'POST',headers:url===FORM_ENDPOINT?{'Accept':'application/json'}:undefined,body:fd}),j=await r.json().catch(()=>({}));if(!r.ok||j.success===false||j.ok===false)throw 0;return j}
  ff.addEventListener('submit',async e=>{e.preventDefault();const err=$('ferr');
-  if(!ff.name.value.trim()||!/^\S+@\S+\.\S+$/.test(ff.email.value)){err.textContent='お名前とメールアドレスを入力してください。';return}
-  if(!ff.optin.checked){err.textContent='同意の欄にチェックを入れてください。';return}
-  err.textContent='';
-  const btn=ff.querySelector('.fgo');btn.disabled=true;
-  try{const k=ff.kind.value,L={doc:'資料請求',talk:'ご相談',order:'お申し込み'}[k]||k,nm=ff.name.value.trim(),em=ff.email.value.trim();
+  if(!check()){err.textContent='お名前、メールアドレス、同意の欄をご確認ください。';return}
+  err.textContent='';btn.classList.add('snd');const t0=performance.now();
+  const k=ff.kind.value,L={doc:'資料請求',talk:'ご相談',order:'お申し込み'}[k]||k,nm=ff.name.value.trim(),em=ff.email.value.trim(),news=k==='doc'&&ff.optin.checked,msg=ff.message.value.trim();
+  let sent=false,mailed=false;
+  if(MAIL_ENDPOINT&&!ff.botcheck.checked){try{const p=new URLSearchParams({kind:k,name:nm,email:em,items:ff.items.value,message:k==='doc'?'':msg,news:news?'1':'',page:location.href});
+    await post(MAIL_ENDPOINT,p);sent=mailed=true}catch(_){}}
+  if(!sent){try{
    // Web3Forms は日本語の項目名が文字化けするので、項目は name/email/message の3つだけにし、中身を日本語で組む
    const body=['■ 種類: '+L,'■ お名前: '+nm+' 様','■ メール: '+em];
    if(ff.items.value)body.push('■ 選んだ内容: '+ff.items.value);
-   if(k!=='doc')body.push('■ ご相談内容:',ff.message.value.trim()||'(記入なし)');
-   if(k==='doc')body.push('','(資料は完了画面からダウンロード済み)');
-   const fd=new FormData();fd.append('access_key',W3F_KEY);fd.append('subject','【Soku】'+L+' '+nm+' 様');fd.append('from_name','Soku LP');
+   if(k!=='doc')body.push('■ ご相談内容:',msg||'(記入なし)');
+   if(k==='doc')body.push('■ お知らせメール: '+(news?'受け取る':'受け取らない'));
+   body.push('','※ 自動返信は送られていません。'+(k==='doc'?'資料を手で送ってください。':'受け付けの控えは届いていません。'));
+   const fd=new FormData();fd.append('access_key',W3F_KEY);fd.append('subject','【Soku】'+L+' '+nm+' 様(要手動)');fd.append('from_name','Soku LP');
    fd.append('name',nm);fd.append('email',em);fd.append('message',body.join('\n'));if(ff.botcheck.checked)fd.append('botcheck','on');
-   const r=await fetch(FORM_ENDPOINT,{method:'POST',headers:{'Accept':'application/json'},body:fd}),j=await r.json().catch(()=>({}));if(!r.ok||j.success===false)throw 0;
-   fm.classList.add('done');ff.reset()}catch(_){err.textContent='送信できませんでした。時間をおいて、もう一度お試しいただくか、info@soku-design.com へ直接ご連絡ください。'}
-  btn.disabled=false});
+   await post(FORM_ENDPOINT,fd);sent=true}catch(_){}}
+  await new Promise(r=>setTimeout(r,Math.max(0,900-(performance.now()-t0))));
+  btn.classList.remove('snd');
+  if(!sent){err.textContent='送信できませんでした。時間をおいて、もう一度お試しいただくか、info@soku-design.com へ直接ご連絡ください。';check();return}
+  const t=T[k];$('fdt').textContent=mailed?t.done:(k==='doc'?'ご請求を受け付けました。':t.done);$('fdto').textContent=em+' 宛て';$('fdd').textContent=mailed?t.dd:t.late;
+  fm.classList.add('done');ff.reset();check()});
 })();
 /* 「速さ」と「価格」を打ち替える */
 (function(){const el=document.getElementById('ty');if(!el)return;
