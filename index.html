@@ -15,6 +15,7 @@
   --paper:#f1f2f4; --dk1:#33353b; --dk2:#292b30;
   --jp:"Hiragino Kaku Gothic ProN","Hiragino Sans","Zen Kaku Gothic New",sans-serif;
   --serif:ui-serif,Georgia,Cambria,"Times New Roman",Times,serif;
+  --num:"Times New Roman",Times,"Noto Serif",serif;
   --e:cubic-bezier(.2,.7,.2,1);
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -138,7 +139,7 @@ h2{font-weight:300;font-size:clamp(24px,2.9vw,42px);line-height:1.7;letter-spaci
 @keyframes cuev{0%{transform:translateY(-100%)}55%{transform:translateY(0)}100%{transform:translateY(100%)}}
 @keyframes cue{60%,100%{transform:translateX(100%)}}
 /* works: one project at a time, pinned */
-.works{height:calc(100svh + 250vh);min-height:0;padding:0;display:block;margin-top:-100svh}
+.works{height:calc(100svh + 480vh);min-height:0;padding:0;display:block;margin-top:-100svh}
 .pin{position:sticky;top:0;height:100svh;overflow:hidden}
 .wsnap{position:absolute;left:0;width:1px;height:1px;pointer-events:none}
 .wcue{position:absolute;right:var(--px);bottom:6vh;z-index:2;font-size:12px;letter-spacing:.06em;color:#52555d;display:flex;align-items:center;gap:12px;transition:opacity .6s}
@@ -204,7 +205,8 @@ h2.nw{white-space:nowrap}
 .tile:before{content:"";position:absolute;inset:0;background:var(--ink);transform:translateY(101%);transition:transform .55s var(--e);z-index:-1}
 .tile .nm{font-size:15px;font-weight:400;letter-spacing:.04em;display:block}
 .tile .sb{font-size:11px;color:var(--sub);display:block;min-height:1.6em;transition:color .45s}
-.tile .pr{font-family:var(--serif);font-size:19px;margin-top:10px;display:block}
+.yn{font-style:normal;font-size:.6em;margin-right:.1em}
+.tile .pr{font-family:var(--num);font-variant-numeric:lining-nums;font-size:20px;margin-top:10px;display:block}
 .tile .ck{position:absolute;right:14px;top:16px;width:16px;height:16px;border:1px solid currentColor;border-radius:50%;opacity:.5;transition:.45s var(--e)}
 .tile.on{color:#f1f2f4;border-color:var(--ink)}
 .tile.on:before{transform:none}
@@ -224,15 +226,15 @@ h2.nw{white-space:nowrap}
 .slip hr{border:0;border-top:1px dashed rgba(28,29,33,.3);margin:16px 0}
 .slip ul{list-style:none;min-height:48px}
 .slip li{display:flex;justify-content:space-between;gap:10px;padding:5px 0;animation:rowin .5s var(--e)}
-.slip li span:last-child{font-family:var(--serif);font-variant-numeric:tabular-nums}
+.slip li span:last-child{font-family:var(--num);font-size:15px;font-variant-numeric:lining-nums tabular-nums}
 .slip li.emp{color:var(--sub)}
 @keyframes rowin{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 .slip .rw{display:flex;justify-content:space-between;align-items:baseline;color:#52555d;font-size:12px}
-.slip .rw s{font-family:var(--serif);font-size:15px;color:var(--sub)}
+.slip .rw s{font-family:var(--num);font-variant-numeric:lining-nums;font-size:16px;color:var(--sub)}
 .slip .tt{display:flex;justify-content:space-between;align-items:baseline;margin-top:10px}
 .slip .tt span{font-size:12px}
-.slip .tt b{font-family:var(--serif);font-weight:400;font-size:clamp(38px,3.8vw,54px);line-height:1.1;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
-.slip .mo{text-align:right;font-family:var(--serif);font-size:13px;color:var(--sub);min-height:20px}
+.slip .tt b{font-family:var(--num);font-weight:400;font-size:clamp(38px,3.8vw,54px);line-height:1.1;letter-spacing:-.01em;font-variant-numeric:lining-nums tabular-nums}
+.slip .mo{text-align:right;font-family:var(--num);font-variant-numeric:lining-nums;font-size:14px;color:var(--sub);min-height:20px}
 .slip .df{margin-top:4px;text-align:right;font-size:12px;color:#52555d;min-height:20px}
 .slip .ft{display:flex;justify-content:space-between;font-size:12px;color:#52555d}
 .slip .btn{margin-top:20px;width:100%;justify-content:space-between}
@@ -319,7 +321,7 @@ h2.nw{white-space:nowrap}
   section{padding-top:10vh;padding-bottom:9vh;min-height:86svh}
   .cue{display:none}
   .wm{top:34%}
-  .works{height:calc(100svh + 230vh)}
+  .works{height:calc(100svh + 400vh)}
   .wintro{width:62vw;align-self:center}
   .track{align-items:center;gap:8vw;padding:16vh 10vw 0 var(--px)}
   .wk{column-gap:10px;row-gap:18px}
@@ -362,10 +364,101 @@ h2.nw{white-space:nowrap}
   .flow .fs{position:relative;top:auto;height:auto;margin-top:46vh}
 }
 @media (prefers-reduced-motion:reduce){.reveal{transition:none;opacity:1;transform:none}.wm span,.hero h1,.hero p,.cue,.hcta{animation:none;opacity:1;transform:none}}
+
+/* ---- 2026-11-17 体験型: 実績の3D・宇宙の奥行き・座布団 ---- */
+.track{display:none}
+.wcap{position:absolute;left:var(--px);bottom:11vh;z-index:3;width:min(400px,calc(100vw - 2*var(--px)));padding:30px 32px 30px;background:rgba(244,245,247,.74);border:1px solid rgba(28,29,33,.14);border-radius:20px;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 30px 70px -40px rgba(28,29,33,.55);will-change:opacity,transform}
+.wcap .wlead{font-size:12.5px;line-height:2;color:#52555d;padding-bottom:18px;margin-bottom:20px;border-bottom:1px solid var(--line)}
+.wcap .no{font-family:var(--serif);font-size:13px;color:var(--sub)}
+.wcap h3{font-family:var(--serif);font-weight:400;font-size:clamp(40px,4vw,60px);line-height:1.05;letter-spacing:-.02em;margin-top:4px}
+.wcap .mt{display:flex;align-items:center;gap:12px;margin-top:14px;font-size:13px;letter-spacing:.06em;color:#3f4249}
+.wcap .mt b{font-weight:400;font-size:11px;letter-spacing:.1em;padding:3px 10px;border:1px solid rgba(28,29,33,.25);border-radius:99px;color:#52555d}
+.wcap .dl{display:flex;margin-top:10px;list-style:none;font-size:12px;letter-spacing:.08em;color:#6a6d74}
+.wcap .dl li+li:before{content:"/";margin:0 10px;opacity:.5}
+.wcap .wth{display:flex;gap:8px;margin-top:20px}
+.wcap .wth img{width:64px;height:64px;object-fit:cover;display:block;border-radius:4px;background:#e4e5e8}
+.wcap.sw{animation:wsw .7s var(--e)}
+@keyframes wsw{from{opacity:.0;transform:translateY(10px)}}
+/* 宇宙: 理由・つくれるもの・ご相談 */
+section.dk.r:not(.ct):before{background:linear-gradient(180deg,var(--dk2),#0a0b0e 55%,#08090b)}
+section.svc.dk:before{background:radial-gradient(60% 50% at 68% 46%,rgba(60,63,74,.5),transparent 72%),linear-gradient(180deg,#08090b,#0b0c10 60%,var(--dk2))}
+section.ct.dk.r:before{background:radial-gradient(55% 40% at 66% 34%,rgba(70,74,88,.42),transparent 70%),linear-gradient(180deg,var(--dk2) 0,#07080a 26%,#050608)}
+@media(min-width:901px){
+ .wcap{left:0;top:0;bottom:auto;width:360px;padding:28px 30px 28px}
+ section.dk .col{max-width:630px;padding:46px 50px 50px;background:rgba(24,25,29,.5);border:1px solid rgba(255,255,255,.13);border-radius:20px;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 30px 80px -34px rgba(0,0,0,.7)}
+ .flow .stp{padding:32px 36px;margin-left:-36px;max-width:546px;background:rgba(24,25,29,.5);border:1px solid rgba(255,255,255,.13);border-radius:20px;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+}
+@media(max-width:900px){.wcap{left:16px;right:16px;width:auto;bottom:4vh;padding:20px 20px 20px}.wcap .wlead{display:none}.wcap h3{font-size:38px}.wcap .wth img{width:52px;height:52px}}
+/* 映像の面が正面のとき: 背景を暗くし、文字を白にする */
+#wdim{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(70% 70% at 50% 50%,#23252b 0%,#111216 100%);opacity:0;will-change:opacity}
+body.vdk .logo,body.vdk .hnav{color:#eef0f2}
+body.vdk .hnav .hb:not(.o){background:#eef0f2;color:#1c1d21;border-color:#eef0f2}
+.pin.vdk{color:#eef0f2}
+.pin.vdk .pcap *,.pin.vdk .pnav #plab *,.pin.vdk .cnt,.pin.vdk .lab span{color:#e6e8ec!important}
+.pin.vdk .pcap .no,.pin.vdk .pcap .pf small,.pin.vdk .pcap .sc b,.pin.vdk .pnav #plab i,.pin.vdk .pnav #plab em{color:#a6a9b1!important}
+.pin.vdk .pcap img{filter:invert(1);mix-blend-mode:screen}
+.pin.vdk .pcap .pf,.pin.vdk .pcap .sc,.pin.vdk .pnav #plab{border-color:rgba(255,255,255,.2)}
+.pin.vdk .lab b{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.16);color:#eef0f2}
+.pin.vdk .cnt i{background:rgba(255,255,255,.2)}.pin.vdk .cnt i:after{background:#eef0f2}
+.pin.vdk .pnav button{background:#eef0f2;border-color:#eef0f2}.pin.vdk .pnav button:after{border-color:#1c1d21}
+.pin.vdk .pnav button:hover{background:transparent}.pin.vdk .pnav button:hover:after{border-color:#eef0f2}
+.pcap *,.pnav #plab *,.pin .lab b,.pin .cnt{transition:color .5s var(--e),background .5s var(--e),border-color .5s var(--e)}
+/* 実績: 多面体(六角柱)。各面に作例と動画。スクロールで回り、カーソルを重ねると説明が出る */
+.wcap{display:none!important}
+#poly{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1}
+.pcap{position:absolute;top:50%;width:min(360px,32vw);transform:translateY(-46%);z-index:3;opacity:0;pointer-events:none;transition:opacity .55s var(--e),transform .7s var(--e)}
+.pcap.l{left:var(--px)}.pcap.r{right:var(--px)}
+.pcap.show{opacity:1;transform:translateY(-50%)}
+.pcap .no{font-family:var(--serif);font-size:13px;color:var(--sub);margin-bottom:18px}
+.pcap img{display:block;width:92px;height:92px;object-fit:contain;margin:0 0 20px -6px;mix-blend-mode:multiply}
+.pcap h3{font-family:var(--serif);font-weight:400;font-size:clamp(34px,3.6vw,54px);line-height:1.05;letter-spacing:-.02em;margin-bottom:12px}
+.pcap .mt{font-size:13px;letter-spacing:.06em;color:#3f4249;margin-bottom:20px}
+.pcap p{font-size:13.5px;line-height:2;color:#3f4249;margin-bottom:20px}
+.pcap ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.pcap li{font-size:12px;letter-spacing:.06em;padding:5px 14px;border:1px solid rgba(28,29,33,.22);border-radius:99px;color:#52555d}
+.pnav{position:absolute;left:50%;bottom:5.5vh;transform:translateX(-50%);z-index:4;display:flex;align-items:center;gap:20px;color:var(--ink);opacity:0;pointer-events:none;transition:opacity .3s var(--e)}
+.pin.pon .pnav{opacity:1;pointer-events:auto}
+/* ほかのボタン(料金を見る など)と同じ、塗りの丸+細い矢 */
+.pnav button{appearance:none;-webkit-appearance:none;width:42px;height:42px;border-radius:50%;border:1px solid var(--ink);background:var(--ink);cursor:pointer;display:grid;place-items:center;padding:0;transition:background .5s var(--e),transform .6s var(--e),opacity .4s}
+.pnav button:after{content:"";width:9px;height:9px;border-top:1px solid #f1f2f4;border-right:1px solid #f1f2f4;transform:rotate(45deg) translate(-1px,1px);transition:border-color .5s var(--e)}
+.pnav #pprev:after{transform:rotate(-135deg) translate(-1px,1px)}
+.pnav button svg{display:none}
+.pnav button:hover{background:transparent}.pnav button:hover:after{border-color:var(--ink)}
+.pnav #pnext:hover{transform:translateX(4px)}.pnav #pprev:hover{transform:translateX(-4px)}
+.pnav button:disabled{opacity:.22;cursor:default;transform:none;background:var(--ink)}.pnav button:disabled:after{border-color:#f1f2f4}
+.pnav #plab{display:flex;align-items:baseline;gap:14px;min-width:25em;justify-content:center;white-space:nowrap;padding:0 22px;border-left:1px solid var(--line);border-right:1px solid var(--line);font-size:12px;letter-spacing:.06em;color:#52555d}
+.pnav #plab i{font-style:normal;font-family:var(--serif);font-size:13px;color:var(--sub);font-variant-numeric:tabular-nums}
+.pnav #plab b{font-family:var(--serif);font-weight:400;font-size:16px;letter-spacing:.02em;color:var(--ink)}
+.pnav #plab span{font-family:var(--serif);font-size:13px;letter-spacing:.04em;color:var(--ink)}
+.pnav #plab em{font-style:normal;font-size:11px;color:var(--sub)}
+.pcap ul{display:none}
+.pcap .pf{margin-top:2px;padding-top:18px;border-top:1px solid var(--line);display:grid;grid-template-columns:auto 1fr;column-gap:12px;align-items:baseline}
+.pcap .pf small{grid-column:1/-1;font-family:var(--serif);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--sub);margin-bottom:6px}
+.pcap .pf b{font-family:var(--serif);font-weight:400;font-size:clamp(20px,1.9vw,26px);letter-spacing:.01em;line-height:1.2;color:var(--ink)}
+.pcap .pf i{font-style:normal;font-size:12px;letter-spacing:.06em;color:#52555d}
+.pcap .pf p{grid-column:1/-1;margin:10px 0 0;font-size:13px;line-height:1.9;color:#3f4249}
+.pcap .pf.sw b,.pcap .pf.sw i,.pcap .pf.sw p{animation:pfin .7s var(--e) both}
+.pcap .pf.sw i{animation-delay:.05s}.pcap .pf.sw p{animation-delay:.1s}
+@keyframes pfin{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.pcap p#pp{margin-bottom:18px}
+.pcap .en{font-family:var(--serif);font-size:13px;letter-spacing:.03em;line-height:1.7;color:#52555d;margin:-10px 0 18px}
+.pcap .sc{margin-top:20px;padding-top:16px;border-top:1px solid var(--line);display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:baseline;font-family:var(--serif);font-size:12.5px;letter-spacing:.03em;color:#3f4249}
+.pcap .sc b{font-weight:400;font-size:11px;letter-spacing:.12em;color:var(--sub);text-transform:uppercase}
+.wld{position:absolute;left:var(--px);top:calc(15vh + 58px);width:min(300px,26vw);z-index:2;font-size:12.5px;line-height:2;color:#52555d;transition:opacity .5s var(--e)}
+.wld span{display:block;margin-top:10px;font-family:var(--serif);font-size:12px;letter-spacing:.03em;line-height:1.7;color:var(--sub)}
+.pin.cap-on .wld{opacity:0}
+.pin .wcue{display:none}
+@media(max-width:900px){
+  .pcap,.pcap.l,.pcap.r{left:var(--px);right:var(--px);top:auto;bottom:calc(6vh + 66px);width:auto;transform:none}
+  .pcap.show{transform:none}
+  .pcap img,.pcap p,.pcap ul,.pcap .sc,.pcap .pf{display:none}.pcap .en{margin:4px 0 0;font-size:12px}.wld{display:none}.pnav{gap:12px}.pnav #plab{min-width:0;padding:0 12px;gap:8px}.pnav #plab span{display:none}.pcap .no{margin-bottom:6px}.pcap h3{font-size:34px;margin-bottom:6px}.pcap .mt{margin-bottom:0}
+  .pnav{bottom:4vh}
+}
 </style>
 </head>
 <body>
 <div id="sheet"></div>
+<div id="wdim"></div>
 <canvas id="gl"></canvas>
 <div id="labels"></div>
 <div class="logo" id="logo">Soku</div>
@@ -388,7 +481,7 @@ h2.nw{white-space:nowrap}
     <button type="submit" class="btn onLight fgo"><span id="fbtn">資料を受け取る</span><i></i></button>
     <p class="ferr" id="ferr"></p>
   </form>
-  <div class="fbox fdone" id="fdone"><button type="button" class="fx" data-x aria-label="閉じる"></button><div class="pill"><b>送信しました</b><span>Thank you</span></div><h3 id="fdt">メールをご確認ください。</h3><p class="fd" id="fdd">数分たっても届かない場合は、迷惑メールのフォルダもご確認ください。</p></div>
+  <div class="fbox fdone" id="fdone"><button type="button" class="fx" data-x aria-label="閉じる"></button><div class="pill"><b>送信しました</b><span>Thank you</span></div><h3 id="fdt">メールをご確認ください。</h3><p class="fd" id="fdd">数分たっても届かない場合は、迷惑メールのフォルダもご確認ください。</p><a class="btn onLight" id="fdl" href="soku-shiryo.pdf" target="_blank" download style="margin-top:22px;display:none">資料をダウンロード<i></i></a></div>
 </div>
 <div id="menu"><a href="#works">実績<small>Works</small></a><a href="#svc">サービス<small>Service</small></a><a href="#est">料金<small>Price</small></a><a href="#flow">流れ<small>Flow</small></a><a href="#faq">よくある質問<small>FAQ</small></a><a href="#contact">お問い合わせ<small>Contact</small></a></div>
 
@@ -403,16 +496,23 @@ h2.nw{white-space:nowrap}
   </div>
 </section>
 
-<section class="works cover" id="works" data-th="l">
+<section class="works" id="works" data-th="l">
   <div class="pin" id="pin">
     <div class="lab"><b>実績</b><span>Works</span></div>
+    <div class="wld"><p>同じ進め方で制作した作例です。ロゴから名刺・チラシ・Webまで、ひとつの考え方でそろえています。</p><span>Three sample brands, designed end to end — from logo to film.</span></div>
     <div class="cnt"><span id="wn">01</span><i id="wb"></i><span>03</span></div>
     <div class="wcue" id="wcue">Scroll<i></i></div>
+    <div class="wcap" id="wcap"><p class="wlead">同じ進め方で制作した作例です。ロゴから名刺・チラシ・Webまで、ひとつの考え方でそろえています。</p><div class="no" id="wcno"></div><h3 id="wch"></h3><div class="mt" id="wcm"></div><ul class="dl" id="wcd"></ul><div class="wth" id="wct"></div></div>
+    <div class="pcap l" id="pcap"><div class="no" id="pno"></div><img id="plogo" alt=""><h3 id="ph"></h3><div class="mt" id="pm"></div><div class="en" id="pe"></div><p id="pp"></p><ul id="pd"></ul><div class="pf" id="pf"><small>Now showing</small><b id="pfe"></b><i id="pfj"></i><p id="pfd"></p></div><div class="sc"><b>Scope</b><span id="psc"></span></div></div>
+    <div class="pnav" id="pnav"><button type="button" id="pprev" aria-label="前の面へ"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M10 3 5 8l5 5"/></svg></button><span id="plab"></span><button type="button" id="pnext" aria-label="次の面へ"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M6 3l5 5-5 5"/></svg></button></div>
     <div class="track" id="track">
       <div class="wintro"><p>同じ進め方で制作した作例です。ロゴから名刺・チラシ・Webまで、ひとつの考え方でそろえています。</p><span>Scroll</span></div>
-      <article class="wk"><div class="wi"><img src="works/roume-flyer.jpg" alt="ROUME チラシ"></div><div class="ws"><img src="works/roume-t1.png" alt="ROUME ロゴ" loading="lazy"><img src="works/roume-t2.jpg" alt="ROUME 名刺" loading="lazy"><img src="works/roume-t3.jpg" alt="ROUME 名刺とチラシ" loading="lazy"></div><div class="wc"><div class="no">01</div><h3>ROUME</h3><div class="mt"><b>作例</b>古道具とコーヒー</div><ul class="dl"><li>ロゴ</li><li>名刺</li><li>チラシ</li></ul></div></article>
-      <article class="wk"><div class="wi"><img src="works/tanne-web1.jpg" alt="TANNE Webサイト"></div><div class="ws"><img src="works/tanne-t1.png" alt="TANNE ロゴ" loading="lazy"><img src="works/tanne-t2.jpg" alt="TANNE 名刺" loading="lazy"><img src="works/tanne-t3.jpg" alt="TANNE Webサイト スマホ" loading="lazy"></div><div class="wc"><div class="no">02</div><h3>TANNE</h3><div class="mt"><b>作例</b>プライベートサロン</div><ul class="dl"><li>ロゴ</li><li>名刺</li><li>Web</li></ul></div></article>
-      <article class="wk"><div class="wi"><img src="works/trns-tee.jpg" alt="TRNS Tシャツ"></div><div class="ws"><img src="works/trns-t1.png" alt="TRNS ロゴ" loading="lazy"><img src="works/trns-t2.jpg" alt="TRNS 缶バッジ" loading="lazy"><img src="works/trns-t3.jpg" alt="TRNS チラシ" loading="lazy"></div><div class="wc"><div class="no">03</div><h3>TRNS</h3><div class="mt"><b>作例</b>ストリートウェアブランド</div><ul class="dl"><li>ロゴ</li><li>グッズ</li><li>チラシ</li></ul></div></article>
+      <article class="wk"><div class="no"></div><h3></h3><div class="mt"></div><ul class="dl"></ul><div class="ws"></div></article>
+      <article class="wk"><div class="no"></div><h3></h3><div class="mt"></div><ul class="dl"></ul><div class="ws"></div></article>
+      <article class="wk"><div class="no"></div><h3></h3><div class="mt"></div><ul class="dl"></ul><div class="ws"></div></article>
+      <article class="wk"><div class="no"></div><h3></h3><div class="mt"></div><ul class="dl"></ul><div class="ws"></div></article>
+      <article class="wk"><div class="no"></div><h3></h3><div class="mt"></div><ul class="dl"></ul><div class="ws"></div></article>
+      <article class="wk"><div class="no"></div><h3></h3><div class="mt"></div><ul class="dl"></ul><div class="ws"></div></article>
     </div>
   </div>
 </section>
@@ -442,11 +542,11 @@ h2.nw{white-space:nowrap}
   <div class="col">
     <div class="pill reveal"><b>サービス</b><span>Service</span></div>
     <h2 class="reveal d1">つくれるもの</h2>
-    <p class="lead reveal d2">ロゴの確定後は、名刺・チラシ・Webも同じ雰囲気でそろえていくことが可能です。</p>
+    <p class="lead reveal d2">ロゴの確定後は、名刺・チラシ・Web・動画まで、同じトーンとコンセプトで統一していくことが可能です。</p>
     <div class="lg reveal d2">
       <div><span>01</span><b>紙</b><p>名刺・ショップカード・チラシ・パンフレット</p></div>
       <div><span>02</span><b>もの</b><p>パッケージ・紙袋・Tシャツ・看板</p></div>
-      <div><span>03</span><b>画面</b><p>Webサイト・SNS・バナー・専用アプリ</p></div>
+      <div><span>03</span><b>デジタル</b><p>Webサイト・SNS・バナー・専用アプリ</p></div>
     </div>
   </div>
 </section>
@@ -463,8 +563,8 @@ h2.nw{white-space:nowrap}
         <hr>
         <ul id="rows"></ul>
         <hr>
-        <div class="rw"><span>一般的な相場</span><s id="cm">¥0</s></div>
-        <div class="tt"><span>合計(税別)</span><b id="tot">¥0</b></div>
+        <div class="rw"><span>一般的な相場</span><s id="cm"><i class="yn">¥</i>0</s></div>
+        <div class="tt"><span>合計(税別)</span><b id="tot"><i class="yn">¥</i>0</b></div>
         <div class="mo" id="mo"></div>
         <div class="df" id="df"></div>
         <hr>
@@ -504,9 +604,10 @@ h2.nw{white-space:nowrap}
         <a class="tl reveal d2" href="#" data-f="talk">お問い合わせ</a>
       </div>
       <div class="qs" id="qs">
-        <div class="q reveal"><button>どこからが3日ですか。<i></i></button><div><p>方向が決まった時点から数えます。</p></div></div>
+        <div class="q reveal"><button>どこからが3日ですか。<i></i></button><div><p>方向が決まった時点から数えます。プロモーション動画は、同じ時点から最短5日です。</p></div></div>
+        <div class="q reveal"><button>プロモーション動画は撮影しますか。<i></i></button><div><p>撮影は行いません。生成AIと動画制作のAIツールで、絵と映像を作ります。そのぶん、短い日数でお渡しできます。お店や人の写真をいただければ、それをもとに、実際の場所や人に近い映像にすることも可能です。</p></div></div>
         <div class="q reveal"><button>何案見られますか。<i></i></button><div><p>1回5案、3回までご提案します。それでも決まらない場合は、半額を返金して終了となります。</p></div></div>
-        <div class="q reveal"><button>AIっぽくなりませんか。<i></i></button><div><p>AIを使うのは案出しまでです。形を選び、線や文字を仕上げるのはデザイナーです。</p></div></div>
+        <div class="q reveal"><button>AIっぽくなりませんか。<i></i></button><div><p>ロゴや印刷物でAIを使うのは、案出しまでです。形を選び、線や文字を仕上げるのはデザイナーです。プロモーション動画は、絵と映像をAIで作り、構成と編集をデザイナーが行います。</p></div></div>
         <div class="q reveal"><button>ロゴの権利はどうなりますか。<i></i></button><div><p>お支払いの完了後にお譲りします。商標の調査と出願は含みません。</p></div></div>
         <div class="q reveal"><button>支払いはいつですか。<i></i></button><div><p>ご注文時の前払いです。クレジットカードか銀行振込でお支払いいただけます。</p></div></div>
         <div class="q reveal"><button>どんなデータで届きますか。<i></i></button><div><p>入稿データ、画像データ、ロゴの使い方ガイドをお渡しします。</p></div></div>
@@ -549,30 +650,33 @@ const ITEMS=[
  {id:'flyer',n:'チラシ',s:'A4・両面',p:30000,m:50000},
  {id:'webd',n:'Webデザイン',s:'',p:50000,m:120000},
  {id:'webb',n:'Web構築',s:'公開まで',p:30000,m:80000},
+ {id:'video',n:'プロモーション動画',s:'15〜20秒・生成AIで制作',p:30000},
 ];
 const MONTHLY=[{id:'opw',n:'Web運用',s:'更新・修正・保守',p:3000}];
 const yen=n=>'¥'+n.toLocaleString('en-US');
+/* 表示用: ¥を小さくする(文字として使う所は yen のまま) */
+const yenH=n=>'<i class="yn">¥</i>'+n.toLocaleString('en-US');
 
 /* estimate */
 const sel=new Set(['logo']);const optsEl=document.getElementById('opts');
-const tiles=(l,list,mo)=>`<div class="gk">${l}</div><div class="tiles">${list.map(o=>`<div class="tile" data-id="${o.id}"><i class="ck"></i><span class="nm">${o.n}</span><span class="sb">${o.s||''}</span><span class="pr">${yen(o.p)}${mo?'<small style="font-size:11px;margin-left:3px">/月</small>':''}</span></div>`).join('')}</div>`;
+const tiles=(l,list,mo)=>`<div class="gk">${l}</div><div class="tiles">${list.map(o=>`<div class="tile" data-id="${o.id}"><i class="ck"></i><span class="nm">${o.n}</span><span class="sb">${o.s||''}</span><span class="pr">${yenH(o.p)}${mo?'<small style="font-size:11px;margin-left:3px">/月</small>':''}</span></div>`).join('')}</div>`;
 optsEl.innerHTML=tiles('一度きり',ITEMS)+tiles('毎月',MONTHLY,true)+`<a class="appc" href="#contact"><span class="gk">ご相談</span><b>専用デザインアプリ</b><p>ロゴや色の決まりを読み込ませた、自社専用のデザイン用AIアプリを開発します。開発費はご相談のうえお見積もりし、運用は月5,000円です。</p><i>相談する</i></a>`;
 const d0=new Date();document.getElementById('dt').textContent=`${d0.getFullYear()}.${String(d0.getMonth()+1).padStart(2,'0')}.${String(d0.getDate()).padStart(2,'0')}`;
 const shown={tot:0,cm:0};let prev=new Set();
 function tween(key,to,el){const from=shown[key],t0=performance.now();cancelAnimationFrame(tween['r'+key]);
- (function s(t){const k=Math.min(1,(t-t0)/700),e=1-Math.pow(1-k,3);el.textContent=yen(Math.round(from+(to-from)*e));if(k<1)tween['r'+key]=requestAnimationFrame(s);else shown[key]=to})(t0)}
+ (function s(t){const k=Math.min(1,(t-t0)/700),e=1-Math.pow(1-k,3);el.innerHTML=yenH(Math.round(from+(to-from)*e));if(k<1)tween['r'+key]=requestAnimationFrame(s);else shown[key]=to})(t0)}
 function calc(){
  optsEl.querySelectorAll('.tile').forEach(e=>e.classList.toggle('on',sel.has(e.dataset.id)));
  const one=ITEMS.filter(i=>sel.has(i.id)),mo=MONTHLY.filter(i=>sel.has(i.id));
  const tot=one.reduce((a,b)=>a+b.p,0),moT=mo.reduce((a,b)=>a+b.p,0);
  const ci=one.filter(i=>i.m),cs=ci.reduce((a,b)=>a+b.p,0),cm=ci.reduce((a,b)=>a+b.m,0);
  const all=[...one,...mo.map(i=>({...i,mo:1}))];
- document.getElementById('rows').innerHTML=all.length?all.map(i=>`<li${prev.has(i.id)?' style="animation:none"':''}><span>${i.n}</span><span>${yen(i.p)}${i.mo?' /月':''}</span></li>`).join(''):'<li class="emp"><span>項目を選んでください</span><span></span></li>';
+ document.getElementById('rows').innerHTML=all.length?all.map(i=>`<li${prev.has(i.id)?' style="animation:none"':''}><span>${i.n}</span><span>${yenH(i.p)}${i.mo?' /月':''}</span></li>`).join(''):'<li class="emp"><span>項目を選んでください</span><span></span></li>';
  prev=new Set(all.map(i=>i.id));
  tween('tot',tot,document.getElementById('tot'));tween('cm',cm,document.getElementById('cm'));
  document.getElementById('mo').textContent=moT?`+ ${yen(moT)} / 月`:'';
  document.getElementById('df').textContent=cm?`相場との差 − ${yen(cm-cs)}`:'';
- document.getElementById('dy').textContent=all.length?'最短 3 日':'—';
+ document.getElementById('dy').textContent=all.length?(sel.has('video')?'最短 3 日(動画は 5 日)':'最短 3 日'):'—';
  const names=all.map(i=>i.n);
  if(window.__cart)window.__cart(new Set(all.map(i=>i.id)));
  document.getElementById('sel').textContent=names.length?'選択中: '+names.join(' / ')+(tot?' — '+yen(tot)+(moT?' + '+yen(moT)+'/月':''):''):'';
@@ -629,8 +733,8 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
  const lt=new THREE.MeshStandardMaterial({color:0xf6f7f9,roughness:.55}),dk=new THREE.MeshStandardMaterial({color:0x2b2d33,roughness:.5}),md=new THREE.MeshStandardMaterial({color:0xb9bdc6,roughness:.5});
  const DEF={logo:[new THREE.SphereGeometry(.33,32,24),lt,.33],card:[new THREE.BoxGeometry(.62,.05,.38),dk,.03],flyer:[new THREE.BoxGeometry(.5,.04,.7),md,.03],
   webd:[new THREE.BoxGeometry(.5,.5,.5),lt,.25],webb:[new THREE.CylinderGeometry(.25,.25,.5,32),md,.25],app:[new THREE.BoxGeometry(.66,.66,.66),dk,.33],
-  opw:[new THREE.TorusGeometry(.2,.07,14,32),lt,.07],opa:[new THREE.TorusGeometry(.26,.08,14,32),dk,.08]};
- const SLOT={logo:[-.75,.28],card:[-.15,.38],flyer:[.5,.32],webd:[-.7,-.3],webb:[0,-.3],app:[.68,-.28],opw:[-.2,.05],opa:[.35,.0]};
+  video:[new THREE.BoxGeometry(.62,.36,.06),dk,.18],opw:[new THREE.TorusGeometry(.2,.07,14,32),lt,.07],opa:[new THREE.TorusGeometry(.26,.08,14,32),dk,.08]};
+ const SLOT={logo:[-.75,.28],card:[-.15,.38],flyer:[.5,.32],webd:[-.7,-.3],webb:[0,-.3],app:[.68,-.28],video:[.4,-.02],opw:[-.2,.05],opa:[.35,.0]};
  const items={},B=1.25;
  Object.keys(DEF).forEach(id=>{const[geo,m,h]=DEF[id];const o=new THREE.Mesh(geo,m);o.visible=false;
   if(id==='opw'||id==='opa')o.userData.flat=1;g.add(o);items[id]={o,h:h*B,y:0,vy:0,s:0,on:false,rest:true}});
@@ -691,14 +795,14 @@ document.querySelectorAll('[data-k]').forEach(a=>a.addEventListener('click',()=>
 (function(){
  const FORM_ENDPOINT='https://api.web3forms.com/submit', W3F_KEY='96a315e6-fb56-4a28-a502-8173f9052797';  // Web3Forms(公開してよいキー。受信先 info@soku-design.com)
  const fm=document.getElementById('fm'),ff=document.getElementById('fform'),$=id=>document.getElementById(id);
- const T={doc:{tag:'資料請求',sub:'PDFをメールでお送りします',tt:'サービス資料のご請求',d:'料金、進め方、作例をまとめたPDFです。ご入力いただいたメールアドレスにお送りします。',b:'資料を受け取る',msg:false,ck:'資料の送付と、Soku からのご案内メールの受け取りに同意します。',done:'ご請求を受け付けました。',dd:'1営業日以内に、info@soku-design.com から資料をお送りします。届かない場合は、迷惑メールのフォルダもご確認ください。'},
+ const T={doc:{tag:'資料請求',sub:'PDFをすぐにお読みいただけます',tt:'サービス資料のご請求',d:'料金、進め方、作例をまとめたPDF(12ページ)です。送信すると、その場でダウンロードできます。',b:'資料を受け取る',msg:false,ck:'Soku からのご案内メールの受け取りに同意します。',done:'ご請求ありがとうございます。',dd:'下のボタンから、資料をダウンロードできます。'},
   talk:{tag:'ご相談',sub:'メールでお返事します',tt:'ご相談・お問い合わせ',d:'内容を確認し、1営業日以内にメールでお返事します。打ち合わせが必要な場合は、こちらから日程をご案内します。',b:'送信する',msg:true,ck:'個人情報の取り扱いに同意します。',done:'送信しました。',dd:'1営業日以内に、メールでお返事します。'},
   order:{tag:'お申し込み',sub:'この内容で進めます',tt:'お申し込み',d:'お支払いのご案内とヒアリングシートを、メールでお送りします。お支払いの確認後に、ヒアリングから始めます。',b:'申し込む',msg:true,ck:'ご利用規約と、個人情報の取り扱いに同意します。',done:'お申し込みを受け付けました。',dd:'お支払いのご案内とヒアリングシートを、メールでお送りします。'}};
  function open(k){const t=T[k];fm.classList.remove('done');$('ftag').textContent=t.tag;$('fsub').textContent=t.sub;$('ftt').textContent=t.tt;$('fdesc').textContent=t.d;$('fbtn').textContent=t.b;
   ff.querySelector('.fmsg').style.display=t.msg?'':'none';ff.kind.value=k;$('ferr').textContent='';
   const items=(document.getElementById('sel').textContent||'').replace(/^選択中:\s*/,'');ff.items.value=k==='doc'?'':items;
   $('fsum').textContent=(k==='order'&&items)?'選んだ内容: '+items:'';
-  $('fck').textContent=t.ck;$('fterms').style.display=k==='order'?'':'none';$('fdt').textContent=t.done;$('fdd').textContent=t.dd;
+  $('fck').textContent=t.ck;$('fterms').style.display=k==='order'?'':'none';$('fdl').style.display=k==='doc'?'':'none';$('fdt').textContent=t.done;$('fdd').textContent=t.dd;
   fm.classList.add('open');fm.setAttribute('aria-hidden','false');setTimeout(()=>ff.name.focus(),300)}
  function close(){fm.classList.remove('open');fm.setAttribute('aria-hidden','true')}
  document.addEventListener('click',e=>{const a=e.target.closest('[data-f]');if(a){e.preventDefault();open(a.dataset.f)}if(e.target.closest('[data-x]'))close()});
@@ -713,7 +817,7 @@ document.querySelectorAll('[data-k]').forEach(a=>a.addEventListener('click',()=>
    const body=['■ 種類: '+L,'■ お名前: '+nm+' 様','■ メール: '+em];
    if(ff.items.value)body.push('■ 選んだ内容: '+ff.items.value);
    if(k!=='doc')body.push('■ ご相談内容:',ff.message.value.trim()||'(記入なし)');
-   if(k==='doc')body.push('','→ 資料(PDF)を返信で送ってください。');
+   if(k==='doc')body.push('','(資料は完了画面からダウンロード済み)');
    const fd=new FormData();fd.append('access_key',W3F_KEY);fd.append('subject','【Soku】'+L+' '+nm+' 様');fd.append('from_name','Soku LP');
    fd.append('name',nm);fd.append('email',em);fd.append('message',body.join('\n'));if(ff.botcheck.checked)fd.append('botcheck','on');
    const r=await fetch(FORM_ENDPOINT,{method:'POST',headers:{'Accept':'application/json'},body:fd}),j=await r.json().catch(()=>({}));if(!r.ok||j.success===false)throw 0;
@@ -797,6 +901,45 @@ const hm=new THREE.MeshBasicMaterial({color:0xeef0f2,transparent:true,opacity:0}
 [[1.9,.012],[2.28,.007],[2.42,.004]].forEach(([r,t])=>tilt.add(new THREE.Mesh(new THREE.TorusGeometry(r,t,8,160),hm)));
 const moonO=new THREE.Group();moonO.rotation.set(.35,0,-.3);halo.add(moonO);
 const moon=new THREE.Mesh(new THREE.SphereGeometry(.2,28,20),mk());moonO.add(moon);
+/* works: カードを奥行き方向に並べ、スクロールで手前へ送る */
+const gal=new THREE.Group();camera.add(gal);gal.visible=false;const cards=[];const TL=new THREE.TextureLoader();
+const rmask=(()=>{const c=document.createElement('canvas');c.width=256;c.height=320;const x=c.getContext('2d');x.fillStyle='#000';x.fillRect(0,0,256,320);x.fillStyle='#fff';const q=11;
+  x.beginPath();x.moveTo(q,0);x.arcTo(256,0,256,320,q);x.arcTo(256,320,0,320,q);x.arcTo(0,320,0,0,q);x.arcTo(0,0,256,0,q);x.fill();return new THREE.CanvasTexture(c)})();
+/* 実績は多面体(ページ末尾のスクリプト)に替えたので、ここのカードは作らない */
+[].forEach(el=>{const g=new THREE.Group();
+  const tx=TL.load(el.querySelector('.wi img').getAttribute('src'));tx.encoding=THREE.sRGBEncoding;tx.anisotropy=8;
+  const face=new THREE.Mesh(new THREE.PlaneGeometry(2.4,3.0),new THREE.MeshBasicMaterial({map:tx,alphaMap:rmask,transparent:true,depthWrite:false}));
+  g.add(face);gal.add(g);cards.push({g,face})});
+let wG=0,wGs=0,wV=0,wCi=-1,wcW=0,wcH=0;
+/* 宇宙の奥行き: 星と遠くの天体 */
+const space=new THREE.Group();scene.add(space);space.visible=false;
+const starM=new THREE.PointsMaterial({color:0xffffff,size:.1,sizeAttenuation:true,transparent:true,opacity:0,depthWrite:false});
+{const N=900,p=new Float32Array(N*3);for(let i=0;i<N;i++){const u=Math.random()*2-1,a=Math.random()*6.283,rr=26+Math.pow(Math.random(),.8)*46,q=Math.sqrt(1-u*u);p[i*3]=Math.cos(a)*q*rr;p[i*3+1]=u*rr*.7;p[i*3+2]=Math.sin(a)*q*rr}
+ const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(p,3));const pt=new THREE.Points(g,starM);pt.frustumCulled=false;space.add(pt)}
+const bodyM=[];const LDIR=new THREE.Vector3(-.62,.46,.63).normalize();
+/* 惑星の面: 写実の模様(クレーター・波の帯)はやめ、無地の面に細い緯線だけを引く。図面のように整った球にする */
+const ptex=(base,bands,seed)=>{const c=document.createElement('canvas');c.width=64;c.height=512;const x=c.getContext('2d');x.fillStyle=base;x.fillRect(0,0,64,512);
+  const g=x.createLinearGradient(0,0,0,512);g.addColorStop(0,'rgba(255,255,255,.10)');g.addColorStop(.5,'rgba(255,255,255,0)');g.addColorStop(1,'rgba(0,0,0,.18)');x.fillStyle=g;x.fillRect(0,0,64,512);
+  const n=seed%2?26:18;x.fillStyle=bands[3]||'#fff';for(let i=1;i<n;i++){x.globalAlpha=i%6===0?.5:.2;x.fillRect(0,Math.round(i/n*512),64,1)}
+  const t=new THREE.CanvasTexture(c);t.wrapS=THREE.RepeatWrapping;t.anisotropy=8;return t};
+const body=(grp,x,y,z,rad,base,bands,seed,ring)=>{const m=new THREE.ShaderMaterial({transparent:true,uniforms:{map:{value:ptex(base,bands,seed)},L:{value:LDIR},op:{value:0}},
+   vertexShader:'varying vec3 vN;varying vec3 vV;varying vec2 vUv;void main(){vUv=uv;vec4 wp=modelMatrix*vec4(position,1.);vN=normalize(mat3(modelMatrix)*normal);vV=normalize(cameraPosition-wp.xyz);gl_Position=projectionMatrix*viewMatrix*wp;}',
+   fragmentShader:'uniform sampler2D map;uniform vec3 L;uniform float op;varying vec3 vN;varying vec3 vV;varying vec2 vUv;void main(){vec3 n=normalize(vN);float d=dot(n,L);float lit=smoothstep(-.02,.42,d);vec3 c=texture2D(map,vUv).rgb*(.02+.98*lit);float rim=pow(1.-max(dot(n,normalize(vV)),0.),5.);c+=vec3(.62,.65,.72)*rim*(.22+.3*lit);c*=.86;gl_FragColor=vec4(c,op);}'});
+  bodyM.push(m);const o=new THREE.Mesh(new THREE.SphereGeometry(rad,64,44),m);o.position.set(x,y,z);o.rotation.z=.32;grp.add(o);
+  if(ring){const rm=new THREE.MeshBasicMaterial({color:0xb9bdc6,transparent:true,opacity:0,side:THREE.DoubleSide,depthWrite:false});rm.userData.k=.7;bodyM.push(rm);
+   [[1.5,1.508],[1.62,1.626],[1.74,1.75],[1.82,1.824],[1.95,1.962],[2.12,2.126],[2.3,2.304]].forEach(([k0,k1])=>{const t=new THREE.Mesh(new THREE.RingGeometry(rad*k0,rad*k1,160,1),rm);t.position.copy(o.position);t.rotation.set(-1.25,.12,.3);grp.add(t)})}return o};
+const spA=new THREE.Group(),spB=new THREE.Group();space.add(spA,spB);
+/* 軌道: 惑星を通る、細い大きな円。奥行きの手がかりと、図としての整いのため */
+const orbit=(grp,cx,cy,cz,R,tilt,k)=>{const m=new THREE.LineBasicMaterial({color:0xcfd3db,transparent:true,opacity:0,depthWrite:false});m.userData.k=k;bodyM.push(m);
+  const pts=[];for(let i=0;i<=240;i++){const a=i/240*6.2832;pts.push(new THREE.Vector3(Math.cos(a)*R,0,Math.sin(a)*R))}
+  const l=new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),m);l.position.set(cx,cy,cz);l.rotation.set(tilt,0,.18);l.frustumCulled=false;grp.add(l);return l};
+const GR=['#d9dce2','#9da1aa','#6f727b','#f1f2f4'],DK=['#7d808a','#4c4f58','#a6a9b1','#2f3138'];
+const A1=body(spA,12.5,-8.5,-42,2.5,'#b9bdc6',GR,7,true),A2=body(spA,15,-36,-46,11,'#5d6068',DK,23,false),A3=body(spA,-1,-7.5,-32,.75,'#dfe2e8',GR,41,false);
+const C1=body(spB,-21,5,-60,3.1,'#b9bdc6',GR,11,true),C2=body(spB,-8,7.5,-38,.85,'#e4e6ea',GR,57,false),C3=body(spB,-30,-16,-70,9,'#565962',DK,31,false);
+orbit(spA,0,-14,-44,19,1.32,.26);orbit(spA,0,-14,-44,31,1.32,.16);orbit(spA,0,-14,-44,46,1.32,.1);
+orbit(spB,-14,2,-58,16,1.28,.26);orbit(spB,-14,2,-58,27,1.28,.16);orbit(spB,-14,2,-58,41,1.28,.1);
+scene.add(camera);const meteorM=new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:0,depthWrite:false});
+const meteor=new THREE.Mesh(new THREE.PlaneGeometry(2.6,.022),meteorM);meteor.rotation.z=-.5;camera.add(meteor);
 const cartEl=document.getElementById('cart');const svcCol=document.querySelector('#svc .col');const baseP=new THREE.Vector3(),tgtP=new THREE.Vector3(),qI=new THREE.Quaternion();
 let raised=false,gateOn=false,handT=0,prevTS=0,fpS=0;
 
@@ -811,8 +954,9 @@ const K=[
  [.42, 1.2,.26,6.6,  0,0,.13, 0,1,0,0],
  [.62, 2.5,.34,5.4,  0,0,.03, 0,1,0,0],
  [.82, 3.6,.22,7.4,  0,0,.08, 0,1,0,0],
- [1.0, 4.3,.2,13,    0,0,.02, 0,1,0,0],
- [1.35,4.5,.2,18,    0,0,-.04,0,1,0,0],
+ [1.0, 4.3,.16,12,   0,0,-.06, 0,.6,0,0],
+ [1.35,4.5,.16,12,   0,0,-.06,0,.6,0,0],
+ [1.72,4.62,.14,12,  0,0,-.06,0,.6,0,0],
  [2.0, 4.7,.12,10.5, 0,0,.25, 0,.95,0,0],
  [2.5, 5.1,.36,17,   .5,1,.25,0,.95,0,0],
  [2.9, 5.4,.3,14,    .2,1,.22,.12,1,0,0],
@@ -841,7 +985,7 @@ const covers=[...document.querySelectorAll('section.cover')];
 const nextIsCover=covers.map(c=>{const n=c.nextElementSibling;return !!(n&&n.classList&&n.classList.contains('cover'))});
 const sheet=document.getElementById('sheet'),heroStick=document.querySelector('.hero .stick');
 const worksEl=document.getElementById('works'),slides=[...document.querySelectorAll('.wk')],track=document.getElementById('track'),wcue=document.getElementById('wcue'),wn=document.getElementById('wn'),wb=document.getElementById('wb');
-const wm=document.getElementById('wm'),eb=document.querySelector('.hero p.eb');
+const wm=document.getElementById('wm'),eb=document.querySelector('.hero p.eb');const wcap=document.getElementById('wcap'),pinL=document.getElementById('pin');
 let tops=[],hts=[];
 const measure=()=>{const h=innerHeight;tops=secs.map(s=>s.offsetTop+(s===worksEl?h:0));hts=secs.map(s=>s.offsetHeight-(s===worksEl?h:0))};
 function timeAt(y){const m=y+innerHeight*.5;let i=0;for(let k=0;k<tops.length;k++)if(tops[k]<=m)i=k;return i+Math.min(1,Math.max(0,(m-tops[i])/hts[i]))}
@@ -902,21 +1046,15 @@ function frame(now){
   sheet.style.opacity=sp.toFixed(3);
   const fully=sp>.995;
 
-  /* works: 横に流れるギャラリー。中央に来た作品にピントが合う */
+  /* works: 球のまわりをカードが回る。止まる位置 = はじめ → 各作品が正面 */
   if(RW.top<H&&RW.bottom>0){const b=RW,tot=Math.max(1,b.height-H);const P=cl(-b.top/tot);
-   const r=cl(worksP*1.4-.4),span=TG.span;
-   /* 止まる位置: はじめ → 各作品が中央に来る位置。間だけ動く */
-   const stops=[0];TG.c.forEach(c0=>{const c=c0-(narrow?W*.5:W*.56);stops.push(Math.max(0,Math.min(span,c)))});
-   const m=stops.length-1,q=cl(P*1.04)*m,si=Math.min(m-1,Math.floor(q)),f=q-si,mv=ss(cl((f-.3)/.55));
-   const x=stops[si]+(stops[si+1]-stops[si])*mv;
-   track.style.transform=`translate3d(${(-x).toFixed(1)}px,${((1-ss(r))*60).toFixed(1)}px,0)`;track.style.opacity=ss(r).toFixed(3);
-   let ci=0,best=1e9;const cx=narrow?W*.5:W*.56;
-   slides.forEach((s,i)=>{const c=TG.c[i]-x,d=(c-cx)/W;
-     if(Math.abs(d)<best){best=Math.abs(d);ci=i}
-     const k=Math.min(1,Math.abs(d)*1.6);s.style.opacity=(1-.45*k).toFixed(3);s.style.transform=`scale(${(1-.06*k).toFixed(4)})`;
-     const im=s.querySelector('.wi img');im.style.transform=`translate3d(${(-d*60).toFixed(1)}px,0,0) scale(1.08)`});
-   wcue.style.opacity=(P>.9?0:ss(r)).toFixed(2);
-   wn.textContent=String(ci+1).padStart(2,'0');wb.style.setProperty('--w',((ci+1)/slides.length*100).toFixed(1)+'%');}
+   const pin=ss(cl((H*.35-b.top)/(H*1.25))),pout=cl((b.bottom-H*.1)/(H*.6));
+   heroStick.style.opacity=cl(1-pin*1.6).toFixed(3);wV=ss(cl(pin*1.4-.4))*ss(pout);
+   const m=slides.length;wG=cl(P*1.04)*m;wGs+=(wG-wGs)*smooth(5.5,dt);
+   const ci=Math.max(0,Math.min(m-1,Math.round(wGs-1)));
+   wCi=ci;window.__w={P,wG,wGs,wV};
+   if(narrow)wcap.style.opacity=wV.toFixed(3);wcue.style.opacity=(P>.9?0:wV).toFixed(2);pinL.style.opacity=wV.toFixed(3);
+  }else{wV=0;if(window.__w)window.__w.wV=0}
 
   /* wordmark lifts away as you leave the first view */
   {const hp=Math.min(1,y/(H*1.0));if(now-t00>1900){wm.style.transform=`translateY(calc(-52% - ${(hp*H*.22).toFixed(1)}px))`;wm.style.opacity=(1-hp*1.1).toFixed(3);eb.style.opacity=cl(1-hp*1.1).toFixed(3)}}
@@ -939,6 +1077,25 @@ function frame(now){
   const ce=Math.cos(el),a=az+mx*.06*heroL;
   camera.position.set(Math.sin(a)*ce*r*rN,look.y+Math.sin(el)*r*rN-my*.2*heroL,lz+Math.cos(a)*ce*r*rN);
   camera.lookAt(look);camera.updateMatrixWorld();
+  /* 実績のカード: 0=正面、+は奥で待つ、−は手前へ抜ける */
+  if(false){gal.visible=true;const X0=narrow?0:1.35,Y0=narrow?.62:.04,Z0=narrow?-9.4:-8.3;
+    cards.forEach((c,i)=>{const d=i-(wGs-1);if(d>3.2||d<-1.05){c.g.visible=false;return}c.g.visible=true;
+      const e=d>=0?d:0,p=d<0?-d:0;
+      c.g.position.set(X0+e*1.18-p*3.4,Y0+e*.5+Math.sin(tt*.6+i*1.7)*.035-p*.3,Z0-e*4.6+p*3.2);
+      c.g.rotation.set(0,-e*.1+p*.5,p*.06);c.g.scale.setScalar(Math.max(.001,.9+.1*wV));c.g.renderOrder=10-Math.round(e*2);
+      c.face.material.opacity=wV*(d>=0?Math.max(0,1-.42*e):Math.max(0,1-p*1.5))});
+    if(!narrow){const d0=wCi-(wGs-1),sh=cl(1-Math.abs(d0)*1.5);
+      v3.set(X0-1.2,Y0,Z0).applyMatrix4(camera.matrixWorld).project(camera);
+      const px=(v3.x*.5+.5)*W,py=(-v3.y*.5+.5)*H;
+      wcap.style.transform=`translate3d(${(px-wcW+26).toFixed(1)}px,${(py-wcH*.5).toFixed(1)}px,0)`;wcap.style.opacity=(wV*ss(sh)).toFixed(3)}
+  }else gal.visible=false;
+  /* 宇宙 */
+  {const skA=ss(ramp(tS,2.8,3.15))*(1-ss(ramp(tS,4.5,4.82))),skB=ss(ramp(tS,6.85,7.15)),sk=Math.max(skA,skB);
+   if(sk>.01){space.visible=true;starM.opacity=sk*.95;
+     spA.visible=skA>.01;spB.visible=skB>.01;bodyM.forEach(m=>{const k=(m.userData.k||1)*(spA.children.some(o=>o.material===m)?skA:skB);if(m.uniforms)m.uniforms.op.value=k;else m.opacity=k});
+     A1.rotation.y=tt*.05;A2.rotation.y=-tt*.025;A3.rotation.y=tt*.14;C1.rotation.y=tt*.05;C2.rotation.y=tt*.14;C3.rotation.y=-tt*.022;
+     const ct=tS>6.9&&!reduce,ph=(tt%4.2)/1.1;if(ct&&ph<1){meteor.visible=true;meteor.position.set(9-ph*16,6.5-ph*8.7,-22);meteorM.opacity=Math.sin(ph*Math.PI)*.9*sk}else meteor.visible=false}
+   else{space.visible=false;meteor.visible=false}}
   mx+=(tmx-mx)*smooth(2.4,dt);my+=(tmy-my)*smooth(2.4,dt);
 
   /* hand-off: the sun leaves its system and drops into the cart */
@@ -962,6 +1119,7 @@ function frame(now){
   const regrow=tS<5.45?1:ss(ramp(tS,5.5,5.88));
   U.k.value=kv;U.s.value=size*(1-.72*hand)*(1-gone)*regrow;
   U.t.value=tt;U.w.value=life*(reduce?.6:1);
+  if(window.__polyHook)window.__polyHook({now,dt,tS,narrow,W,H,solid,U,mat,camera,world,kv});
   qI.copy(solid.quaternion).invert();U.m.value.set(mx,-my,.75).normalize().applyQuaternion(qI);
   const rz=(tS>4.9&&tS<5.42)||(narrow&&handT>.001&&handT<.999);if(rz!==raised){raised=rz;canvas.style.zIndex=rz?3:1}
   const gt=handT>.97||tS>=5.45;if(gt!==gateOn){gateOn=gt;if(window.__cartGate)window.__cartGate(gt)}
@@ -1013,7 +1171,150 @@ function frame(now){
   if(th!==lastTh){logo.className='logo '+th;hnav.className='hnav '+th;lastTh=th}
   if(fully&&!raised)renderer.clear();else renderer.render(scene,camera);
 }
-requestAnimationFrame(frame);
+requestAnimationFrame(frame);window.__frame=frame;
+(function(){
+  if(!/[?&]sm=1/.test(location.search)&&(reduce||matchMedia('(pointer:coarse)').matches||innerWidth<900))return;
+  let tgt=scrollY,pos=scrollY,on=false,lastW=0,snapped=true,lt=performance.now();
+  const maxY=()=>document.documentElement.scrollHeight-innerHeight;
+  function stops(){const Hh=innerHeight,a=[0],m=slides.length,y0=worksEl.offsetTop,tot=worksEl.offsetHeight-Hh;
+    for(let k=1;k<=m;k++)a.push(y0+Math.min(1,k/(m*1.04))*tot);
+    secs.forEach((sc,i)=>{if(i<2)return;if(sc.classList.contains('ct'))a.push(maxY());else if(sc.classList.contains('flow')){a.push(sc.offsetTop);a.push(sc.offsetTop+sc.offsetHeight-Hh)}else a.push(sc.offsetTop+Math.max(0,(sc.offsetHeight-Hh)/2)*(sc.classList.contains('est')?0:1))});
+    return a}
+  addEventListener('wheel',e=>{if(e.ctrlKey||(e.target.closest&&e.target.closest('#fm.open')))return;e.preventDefault();
+    if(!on){tgt=pos=scrollY;on=true}tgt=Math.max(0,Math.min(maxY(),tgt+e.deltaY*(e.deltaMode===1?32:1)));lastW=performance.now();snapped=false},{passive:false});
+  addEventListener('click',e=>{if(e.target.closest('a[href^="#"]'))on=false},true);
+  addEventListener('keydown',()=>{on=false});addEventListener('pointerdown',()=>{on=false});
+  function step(now){const dt=Math.min(.05,(now-lt)/1000);lt=now;if(!on)return;
+    const idle=now-lastW;
+    if(!snapped&&idle>170){snapped=true;const st=stops();let b=tgt,bd=1e9;st.forEach(v=>{const d=Math.abs(v-tgt);if(d<bd){bd=d;b=v}});if(bd<innerHeight*.3)tgt=b}
+    pos+=(tgt-pos)*(1-Math.exp(-(idle>170?4.2:7.5)*dt));
+    if(Math.abs(tgt-pos)<.3){pos=tgt;if(idle>400)on=false}
+    scrollTo(0,pos)}
+  (function tick(now){requestAnimationFrame(tick);step(now)})(performance.now());
+  window.__smStep=step;
+})();
+})();
+</script>
+<script>
+/* 実績: ファーストビューの立体そのものが、作例を映す台になる。
+   立体(球⇄箱)を箱の形にして縦に伸ばし、4つの側面に作例と動画を映す。面は4つだが、裏に回った面の中身を入れ替えて6面ぶんを順に見せる。
+   本体の描画ループから毎コマ呼ばれる(window.__polyHook)。進み具合は window.__w */
+(()=>{
+if(!window.THREE)return;
+const W_='works/';
+const WORKS=[
+ {no:'01',name:'ROUME',kind:'古道具とコーヒー',en:'Vintage furniture & coffee — Kakuozan, Nagoya',logo:W_+'roume-t1.png',side:'l',text:'窓から光が落ちる、レンタルスペース&コーヒーショップ。ロゴを起点に、名刺、チラシ、プロモーション動画まで、同じトーンとコンセプトで統一しました。',items:['ロゴ','名刺','チラシ','動画'],scope:'Logo / Business card / Flyer / Promotion film'},
+ {no:'02',name:'TANNE',kind:'プライベートサロン',en:'Private hair salon — one chair, by appointment only',logo:W_+'tanne-t1.png',side:'r',text:'一度にお迎えするのは1人。名刺から予約のWebサイト、プロモーション動画まで制作しました。',items:['ロゴ','名刺','Web','動画'],scope:'Logo / Business card / Website / Promotion film'},
+ {no:'03',name:'TRNS',kind:'ストリートウェアブランド',en:'Streetwear label — TRANSIT SUPPLY',logo:W_+'trns-t1.png',side:'l',text:'ストリートウェアのブランド。ロゴ一式から、グッズ、ポップアップ告知のチラシまで。',items:['ロゴ','グッズ','チラシ'],scope:'Logo system / Goods / Flyer'}
+];
+const ITEMS=[
+ {work:0,video:W_+'roume-cm.mp4',label:'プロモーション動画',en:'Promotion film',d:'街の喧騒から、緑に囲まれた店へ。約18秒の動画です。'},
+ {work:0,img:W_+'roume-flyer.jpg',label:'チラシ',en:'Flyer',d:'A4・両面のチラシ。写真1枚と、少ない文字で組みました。'},
+ {work:1,video:W_+'tanne-cm.mp4',label:'プロモーション動画',en:'Promotion film',d:'一対一で切ってもらう時間を、約14秒にまとめました。'},
+ {work:1,img:W_+'tanne-web1.jpg',label:'Webサイト',en:'Website',d:'パソコンとスマホの両方に合わせたWebサイト。'},
+ {work:2,img:W_+'trns-tee.jpg',label:'グッズ',en:'Goods',d:'Tシャツ、缶バッジ、織りネーム、ステッカー。'},
+ {work:2,img:W_+'trns-logo-c.jpg',label:'ロゴ',en:'Logo',d:'略称のTRNSと、フルネームのTRANSIT SUPPLY。バッジと円形のシールまで。'}
+];
+const N=ITEMS.length,QS=Math.PI/2,$=id=>document.getElementById(id);
+const pin=$('pin'),sec=$('works'),cap=$('pcap'),prev=$('pprev'),next=$('pnext'),lab=$('plab'),dimEl=$('wdim');
+const setDim=v=>{vdS=v;if(dimEl)dimEl.style.opacity=(.94*v).toFixed(3);const on=v>.45;if(on!==vdOn){vdOn=on;document.body.classList.toggle('vdk',on);pin.classList.toggle('vdk',on)}};
+if(!pin||!cap)return;
+const coarse=matchMedia('(hover:none),(pointer:coarse)').matches;
+const cl=v=>Math.min(1,Math.max(0,v)),ss=v=>v*v*(3-2*v),ramp=(t,a,b)=>cl((t-a)/(b-a)),mix=(a,b,t)=>a+(b-a)*t;
+/* 区間ごとの動き: px=前後の倒れ(+で前へ) rz=横の傾き ry=向きの振れ dy=上下 dz=奥行き dx=左右 */
+const PAT=[{px:.22,rz:.11,ry:0,dy:-.18,dz:.9,dx:0},{px:-.26,rz:-.09,ry:.1,dy:.24,dz:.5,dx:0},{px:-.2,rz:.16,ry:-.08,dy:-.34,dz:1.2,dx:0},{px:.12,rz:-.2,ry:.16,dy:.1,dz:2.0,dx:.35},{px:.28,rz:.06,ry:-.12,dy:.2,dz:.7,dx:-.4}];
+const dwell=x=>{if(x<=0)return x;const i=Math.floor(x),f=x-i,s=f*f*(3-2*f);return i+s*s*(3-2*s)};
+let scr=null,hit=null,planes=[],tex=[],vids=[],capVids=[];
+function build(solid){
+  const TL=new THREE.TextureLoader();
+  ITEMS.forEach((f,i)=>{let t,v=null;
+    if(f.video){v=document.createElement('video');v.muted=true;v.loop=true;v.playsInline=true;v.preload='metadata';v.setAttribute('playsinline','');v.setAttribute('muted','');v.src=f.video;
+      t=new THREE.VideoTexture(v);t.minFilter=THREE.LinearFilter;t.magFilter=THREE.LinearFilter}
+    else{t=TL.load(f.img);t.anisotropy=8}
+    t.encoding=THREE.sRGBEncoding;tex.push(t);vids.push(v)});
+  /* 立体と同じ形(角の丸い箱)に、作例をそのまま巻く。白い縁は出ず、角は丸いまま */
+  const U=window.__polyU,vsh=sh=>{sh.uniforms.uK=U.k;sh.uniforms.uSz=U.s;
+    sh.vertexShader=sh.vertexShader.replace('void main() {','uniform float uK;uniform float uSz;\nvoid main() {')
+     .replace('#include <begin_vertex>',`vec3 sN=normalize(position);vec3 sP=sN*1.2;float rad=.14;vec3 qq=clamp(position,vec3(-(1.-rad)),vec3(1.-rad));vec3 dd=position-qq;float dl=length(dd);
+      vec3 bN=dl>1e-5?dd/dl:normal;vec3 bP=(qq+bN*rad)*.86;vec3 transformed=mix(sP,bP,uK)*uSz*1.012;`)};
+  const mkM=o=>{const m=new THREE.MeshBasicMaterial(Object.assign({transparent:true,opacity:0,toneMapped:false},o));m.onBeforeCompile=vsh;return m};
+  for(let j=0;j<4;j++){const m=mkM({map:tex[j]});m.userData.c=j;planes.push(m)}
+  /* 上と下の面にも動画を映す。いまは仮の素材(works/cap-top.mp4・cap-bottom.mp4)。あとで同じ名前で差し替える */
+  const capV=src=>{const v=document.createElement('video');v.muted=true;v.loop=true;v.playsInline=true;v.preload='metadata';v.setAttribute('playsinline','');v.setAttribute('muted','');v.src=src;
+    const t=new THREE.VideoTexture(v);t.minFilter=THREE.LinearFilter;t.magFilter=THREE.LinearFilter;t.encoding=THREE.sRGBEncoding;capVids.push(v);return mkM({map:t})};
+  const capT=capV(W_+'cap-top.mp4'),capB=capV(W_+'cap-bottom.mp4');
+  /* 箱の面の順(+x,-x,+y,-y,+z,-z)に合わせる。正面から右回りに 0,1,2,3 */
+  scr=new THREE.Mesh(solid.geometry,[planes[1],planes[3],capT,capB,planes[0],planes[2]]);scr.frustumCulled=false;scr.renderOrder=6;solid.add(scr);planes.caps=[capT,capB];
+  /* カーソルの当たり判定用(見えない箱) */
+  hit=new THREE.Mesh(new THREE.BoxGeometry(1.72,1.72,1.72),new THREE.MeshBasicMaterial({visible:false}));solid.add(hit);
+  solid.renderOrder=5;
+}
+let vdS=0,vdOn=false,sideS=1,txS=0,tyS=0,dS=9,pitS=0,rolS=0,yaw=0,mx=0,my=0,smx=0,smy=0,inside=false,hover=false,hov=0,srot=0,curW=-1,front=-1,ent=0,lastX=0,velo=0,seen=false,ws=0;
+const ray=new THREE.Raycaster(),mv=new THREE.Vector2(),mvh=new THREE.Vector2(),qT=new THREE.Quaternion(),qL=new THREE.Quaternion(),eu=new THREE.Euler(),pT=new THREE.Vector3(),vR=new THREE.Vector3(),vU=new THREE.Vector3(),vD=new THREE.Vector3(),vN=new THREE.Vector3();
+addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;const r=pin.getBoundingClientRect();mx=(e.clientX/innerWidth)*2-1;my=(e.clientY/innerHeight)*2-1;mv.set(mx,-my);inside=e.clientY>=r.top&&e.clientY<=r.bottom},{passive:true});
+document.addEventListener('mouseleave',()=>{inside=false});
+function setCap(w){if(w===curW)return;const first=curW<0;curW=w;const d=WORKS[w];cap.classList.remove('show');
+  setTimeout(()=>{cap.className='pcap '+d.side;$('pno').textContent=d.no+' / 03　Sample work';$('pe').textContent=d.en;$('psc').textContent=d.scope;$('plogo').src=d.logo;$('ph').textContent=d.name;$('pm').textContent=d.kind;$('pp').textContent=d.text;$('pd').innerHTML=d.items.map(x=>'<li>'+x+'</li>').join('')},first?0:200);
+  $('wn').textContent=d.no;$('wb').style.setProperty('--w',((w+1)/WORKS.length*100).toFixed(1)+'%')}
+function setLab(i){lab.innerHTML='<i>'+String(i+1).padStart(2,'0')+' / 0'+N+'</i><b>'+WORKS[ITEMS[i].work].name+'</b><span>'+ITEMS[i].en+'</span><em>'+ITEMS[i].label+'</em>';
+  const pf=$('pf');$('pfe').textContent=ITEMS[i].en;$('pfj').textContent=ITEMS[i].label;$('pfd').textContent=ITEMS[i].d;pf.classList.remove('sw');void pf.offsetWidth;pf.classList.add('sw');prev.disabled=i<=0;next.disabled=i>=N-1}
+function go(d){const st=window.__w||{wG:1},k=Math.max(1,Math.min(N,Math.round(st.wG)+d)),tot=sec.offsetHeight-innerHeight;
+  scrollTo({top:sec.offsetTop+Math.min(1,k/(N*1.04))*tot,behavior:'smooth'})}
+prev.addEventListener('click',()=>go(-1));next.addEventListener('click',()=>go(1));
+setCap(0);setLab(0);
+
+window.__polyHook=o=>{
+  const {tS,narrow,solid,U,mat,camera,kv}=o,dt=Math.max(.001,o.dt||0);if(!scr){window.__polyU=U;build(solid)}window.__o=o;if(!(velo===velo))velo=0;
+  const st=window.__w,wV=st?st.wV:0,wT=ss(cl(wV))*(1-ss(ramp(st?st.P:0,.966,.99)));ws+=(wT-ws)*Math.min(1,dt*(wT<ws?11:6));const w=ws<.002?0:ws;
+  /* 実績を終えたら、箱からすぐ球へ戻す(本体の流れでは、球になるのが少し先のため) */
+  const kx=mix(kv,0,ss(ramp(st?st.P:0,.966,.99))*cl(wV*4));if(w<=0)U.k.value=kx;
+  /* 背景に星や惑星が出るセクションでは、立体を透かさない */
+  const sk=Math.max(ss(ramp(tS,2.8,3.15))*(1-ss(ramp(tS,4.5,4.82))),ss(ramp(tS,6.85,7.15)));
+  const op=ss(ramp(w,.55,1));mat.opacity=mix(.66,1,Math.max(w,sk))*(1-op);
+  solid.scale.set(1,1+.25*w,1);
+  pin.classList.toggle('pon',w>.55&&ent>.5);
+  if(w<=0){if(seen){seen=false;planes.forEach(p=>p.opacity=0);vids.concat(capVids).forEach(v=>v&&!v.paused&&v.pause());cap.classList.remove('show')}if(vdS>0)setDim(0);scr.visible=false;return}
+  seen=true;scr.visible=true;
+  const x=Math.max(-1,Math.min(N-1,st.wGs-1)),xd=dwell(Math.max(0,x));velo+=((x-lastX)/dt-velo)*.12;lastX=x;
+  ent+=((x>-.45?1:0)-ent)*Math.min(1,dt*4);
+  const tr=-xd*QS+(1-ent)*.7;srot+=(tr-srot)*Math.min(1,dt*7);
+  const xr=-srot/QS,fi=Math.max(0,Math.min(N-1,Math.round(xr)));
+  if(fi!==front){front=fi;setLab(fi);const v0=vids[fi];if(v0){try{v0.currentTime=0}catch(e){}}}setCap(ITEMS[fi].work);
+  /* 裏に回った面の中身を入れ替える */
+  planes.forEach((p,j)=>{let c=j+4*Math.round((xr-j)/4);if(c<0||c>N-1)c=j;if(c!==p.userData.c){p.userData.c=c;p.map=tex[c]}});
+  /* 重なりの判定は「横へ寄る前の位置」で行う(寄ったせいでカーソルから外れて、出たり消えたりするのを防ぐ) */
+  if(!coarse){const sd0=WORKS[ITEMS[Math.max(0,front)].work].side==='l'?1:-1,hw0=9*Math.tan(camera.fov*Math.PI/360)*camera.aspect;
+    mvh.set(mv.x,mv.y);ray.setFromCamera(mvh,camera);hit.scale.setScalar(U.s.value);hit.updateMatrixWorld(true);hover=inside&&w>.6&&ray.intersectObject(hit,false).length>0}
+  hov+=((hover?1:0)-hov)*Math.min(1,dt*5.5);
+  const capOn=ent>.6&&w>.6;cap.classList.toggle('show',capOn);pin.classList.toggle('cap-on',capOn);
+  smx+=(mx-smx)*Math.min(1,dt*3);smy+=(my-smy)*Math.min(1,dt*3);
+  const side=WORKS[ITEMS[fi].work].side==='l'?1:-1;
+  /* カメラの正面に置く(カメラがどこを向いていても、面がこちらを向く) */
+  /* 面から面への動き方は、区間ごとに変える(前へ倒れる/上を向く/沈みながら見上げる/奥へ引く/横へ流れる)。速さで大きさが変わり、戻るときは逆向きに傾く */
+  const seg=Math.max(0,Math.min(N-2,Math.floor(x))),fr=x>0?x-Math.floor(x):0,mvb=Math.sin(Math.PI*fr),pa=PAT[seg],spd=Math.min(1,Math.abs(velo)*.55),amp=.7+.6*spd,dir=velo<-.02?-1:1;
+  sideS+=(side-sideS)*Math.min(1,dt*3.2);
+  /* 映像の面が正面で止まっている間: まわりを暗くし、箱を少し手前へ出す */
+  const vdT=(ITEMS[fi].video&&w>.6&&ent>.6)?Math.max(0,1-mvb*1.8):0;setDim(Math.abs(vdT-vdS)<.004?vdT:vdS+(vdT-vdS)*Math.min(1,dt*3.2));
+  const D=9+pa.dz*mvb*amp-.45*vdS,S=(narrow?1.02:1.42)*(.78+.22*ent)*(1+.05*hov)*(1+.05*vdS);
+  camera.getWorldDirection(vD);vR.set(1,0,0).applyQuaternion(camera.quaternion);vU.set(0,1,0).applyQuaternion(camera.quaternion);
+  /* 箱は、説明の反対側に置いたまま、カーソルに合わせて大きめに動く */
+  const tx0=(narrow?0:sideS*1.5)+smx*.42+pa.dx*mvb*amp*dir,ty0=-smy*.26+(narrow?.72:.08)+pa.dy*mvb*amp;
+  txS+=(tx0-txS)*Math.min(1,dt*4.5);tyS+=(ty0-tyS)*Math.min(1,dt*4.5);dS+=(D-dS)*Math.min(1,dt*4.5);const tx=txS,ty=tyS;
+  /* 画面の中央を基準にする(本体のカメラは、セクションによって投影を横へずらしているため、そのぶんを打ち消す) */
+  pT.copy(camera.position).addScaledVector(vD,dS);vN.copy(pT).project(camera);
+  const hh=dS*Math.tan(camera.fov*Math.PI/360),hw=hh*camera.aspect;
+  pT.addScaledVector(vR,tx-vN.x*hw).addScaledVector(vU,ty-vN.y*hh);
+  const vt=Math.max(-.26,Math.min(.26,velo*.14));
+  pitS+=(pa.px*mvb*amp-pitS)*Math.min(1,dt*6);rolS+=(pa.rz*mvb*amp*dir-rolS)*Math.min(1,dt*6);
+  yaw=srot+smx*.42-sideS*.14+pa.ry*mvb*amp*dir;eu.set(smy*.26+pitS,yaw,-smx*.09+vt+rolS);qL.setFromEuler(eu);qT.copy(camera.quaternion).multiply(qL);
+  solid.position.lerp(pT,w);solid.quaternion.slerp(qT,w);
+  U.k.value=mix(kx,1,w);U.s.value=mix(U.s.value,S,w);U.w.value*=(1-w);
+  planes.caps.forEach(m=>{m.opacity=op;m.color.setScalar(.72)});capVids.forEach(v=>{if(op>.5&&v.paused){const q=v.play();q&&q.catch(()=>{})}});
+  planes.forEach((p,j)=>{const c=Math.cos(yaw+j*QS),b=.42+.58*Math.pow(Math.max(0,c),1.4);p.color.setScalar(b);p.opacity=op;
+    const v=vids[p.userData.c];if(v){const vis=c>.15&&op>.5;if(vis&&v.paused){const q=v.play();q&&q.catch(()=>{})}else if(!vis&&!v.paused)v.pause()}});
+  vids.forEach((v,i)=>{if(v&&!v.paused&&!planes.some(p=>p.userData.c===i))v.pause()});
+};
+window.__poly={setMouse:(x,y)=>{mx=x;my=y;mv.set(x,-y);inside=true},get s(){return {front,hover,ent,srot,hov,ws,cs:planes.map(p=>p.userData.c)}}};
 })();
 </script>
 </body>
