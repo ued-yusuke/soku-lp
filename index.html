@@ -906,7 +906,7 @@ document.querySelectorAll('[data-k]').forEach(a=>a.addEventListener('click',()=>
   if(btn.classList.contains('snd'))return ok;
   btn.disabled=!ok;btn.classList.toggle('rdy',ok);hint.classList.toggle('off',ok);if(ok)$('ferr').textContent='';return ok}
  ff.addEventListener('input',check);ff.addEventListener('change',check);
- function open(k){try{gtag('event','form_open',{form_kind:k})}catch(_){}try{fbq('trackCustom','FormOpen',{form_kind:k})}catch(_){}const t=T[k];fm.classList.remove('done');$('ftag').textContent=t.tag;$('fsub').textContent=t.sub;$('ftt').textContent=t.tt;$('fdesc').textContent=t.d;$('fbtn').textContent=t.b;
+ function open(k,auto){try{gtag('event',auto?'form_open_auto':'form_open',{form_kind:k})}catch(_){}try{fbq('trackCustom',auto?'FormOpenAuto':'FormOpen',{form_kind:k})}catch(_){}const t=T[k];fm.classList.remove('done');$('ftag').textContent=t.tag;$('fsub').textContent=t.sub;$('ftt').textContent=t.tt;$('fdesc').textContent=t.d;$('fbtn').textContent=t.b;
   ff.querySelector('.fmsg').style.display=t.msg?'':'none';ff.kind.value=k;$('ferr').textContent='';
   const items=(document.getElementById('sel').textContent||'').replace(/^選択中:\s*/,'');ff.items.value=k==='doc'?'':items;
   $('fsum').textContent=(k==='order'&&items)?'選んだ内容: '+items:'';
@@ -915,6 +915,8 @@ document.querySelectorAll('[data-k]').forEach(a=>a.addEventListener('click',()=>
  function close(){fm.classList.remove('open');fm.setAttribute('aria-hidden','true')}
  document.addEventListener('click',e=>{const a=e.target.closest('[data-f]');if(a){e.preventDefault();open(a.dataset.f)}if(e.target.closest('[data-x]'))close()});
  addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+ /* 広告などから ?f=doc(または talk)で来たら、そのフォームを開いた状態で見せる。自分で開いた回数と分けるため、計測は form_open_auto */
+ {const f=new URLSearchParams(location.search).get('f');if(f==='doc'||f==='talk')setTimeout(()=>open(f,true),900)}
  async function post(url,fd){const r=await fetch(url,{method:'POST',headers:url===FORM_ENDPOINT?{'Accept':'application/json'}:undefined,body:fd}),j=await r.json().catch(()=>({}));if(!r.ok||j.success===false||j.ok===false)throw 0;return j}
  ff.addEventListener('submit',async e=>{e.preventDefault();const err=$('ferr');
   if(!check()){err.textContent='お名前、メールアドレス、同意の欄をご確認ください。';return}
