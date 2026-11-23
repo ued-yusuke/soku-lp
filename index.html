@@ -143,11 +143,16 @@ h2{font-weight:500;font-size:clamp(24px,2.9vw,42px);line-height:1.7;letter-spaci
 .fsum{font-size:12.5px;line-height:1.9;color:#3f4249;background:rgba(255,255,255,.55);border-radius:4px;padding:12px 14px;margin:-6px 0 20px}
 .fsum:empty{display:none}
 .fbox label{display:block;font-size:12px;letter-spacing:.06em;color:#52555d;margin-bottom:16px}
-.fbox input:not([type=checkbox]),.fbox textarea{display:block;width:100%;margin-top:6px;padding:12px 14px;border:1px solid rgba(28,29,33,.22);border-radius:4px;background:#fff;font:inherit;font-size:15px;color:var(--ink);letter-spacing:.03em;outline:none;transition:border-color .3s}
+.fbox input:not([type=checkbox]),.fbox textarea{display:block;width:100%;margin-top:6px;padding:12px 14px;border:1px solid rgba(28,29,33,.22);border-radius:4px;background:#fff;font:inherit;font-size:16px;color:var(--ink);letter-spacing:.03em;outline:none;transition:border-color .3s}
 .fbox input:focus,.fbox textarea:focus{border-color:var(--ink)}
 .fck{display:flex!important;gap:12px;align-items:flex-start;line-height:1.8;cursor:pointer;margin-bottom:12px!important}
 .fck input{position:absolute;opacity:0;width:1px;height:1px}
 .fck.hid{display:none!important}
+#ftag{white-space:nowrap}
+.fagree{padding:10px 0;margin:-10px 0 0!important;min-height:44px}
+.flinks{margin:-4px 0 14px 32px;font-size:11.5px;color:#7b7e86;letter-spacing:.04em;line-height:1.7}
+.flinks a{color:inherit;text-underline-offset:3px}
+.flinks .nw{white-space:nowrap}
 .fck a{color:inherit;text-underline-offset:3px}
 /* チェック: 四角が塗られ、線が引かれる */
 .cb{flex:none;width:20px;height:20px;margin-top:1px;border:1px solid rgba(28,29,33,.4);border-radius:5px;background:#fff;display:grid;place-items:center;transition:background .35s var(--e),border-color .35s var(--e),transform .35s var(--e)}
@@ -177,7 +182,7 @@ h2{font-weight:500;font-size:clamp(24px,2.9vw,42px);line-height:1.7;letter-spaci
 .fgo.snd i{animation:none}
 .fgo.snd i:after{width:16px;height:16px;border-radius:50%;border:1.5px solid rgba(28,29,33,.2);border-top-color:#1c1d21;transform:none;animation:fspin .8s linear infinite}
 @keyframes fspin{to{transform:rotate(360deg)}}
-.fhint{font-size:11.5px;color:#7b7e86;letter-spacing:.04em;margin-top:10px;transition:opacity .4s var(--e),max-height .4s var(--e);max-height:24px;overflow:hidden}
+.fhint{font-size:11.5px;color:#7b7e86;letter-spacing:.04em;margin-top:10px;transition:opacity .4s var(--e),max-height .4s var(--e);max-height:48px;overflow:hidden}
 .fhint.off{opacity:0;max-height:0;margin-top:0}
 .ferr{min-height:20px;margin-top:10px;font-size:12px;color:#8a3b3b}
 .fx{position:absolute;right:18px;top:18px;width:34px;height:34px;border:0;background:transparent;cursor:pointer}
@@ -561,12 +566,13 @@ body.vdk .hnav .hb:not(.o){background:#eef0f2;color:#1c1d21;border-color:#eef0f2
     <label>お名前<input name="name" autocomplete="name" required></label>
     <label>メールアドレス<input name="email" type="email" autocomplete="email" required></label>
     <label class="fmsg">ご相談内容(任意)<textarea name="message" rows="3"></textarea></label>
-    <label class="fck"><input type="checkbox" name="agree" required><i class="cb"><svg viewBox="0 0 16 16"><path d="M3.4 8.5l3 3 6.2-6.8"/></svg></i><span><a href="terms.html" target="_blank" id="fterms" style="display:none">ご利用規約</a><span id="ftand" style="display:none">と</span><a href="privacy.html" target="_blank">プライバシーポリシー</a>に同意します。</span></label>
+    <label class="fck fagree"><input type="checkbox" name="agree" required><i class="cb"><svg viewBox="0 0 16 16"><path d="M3.4 8.5l3 3 6.2-6.8"/></svg></i><span><span id="fterms" style="display:none">ご利用規約</span><span id="ftand" style="display:none">と</span>プライバシーポリシーに同意します。</span></label>
+    <p class="flinks"><a href="terms.html" target="_blank" id="ftermsl" style="display:none">ご利用規約</a><span id="ftandl" style="display:none">・</span><span class="nw"><a href="privacy.html" target="_blank">プライバシーポリシー</a>を読む</span></p>
     <label class="fck" id="fnews"><input type="checkbox" name="optin"><i class="cb"><svg viewBox="0 0 16 16"><path d="M3.4 8.5l3 3 6.2-6.8"/></svg></i><span>Soku からのお知らせメールも受け取る(任意)</span></label>
     <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none">
     <input type="hidden" name="kind"><input type="hidden" name="items">
     <button type="submit" class="btn onLight fgo" disabled><span class="fl2"><span id="fbtn">資料をメールで受け取る</span><span class="fsd">送信しています</span></span><i></i></button>
-    <p class="fhint" id="fhint">お名前、メールアドレス、同意の3つがそろうと送信できます。</p>
+    <p class="fhint" id="fhint">お名前・メール・同意で送信できます</p>
     <p class="ferr" id="ferr"></p>
   </form>
   <div class="fbox fdone" id="fdone"><button type="button" class="fx" data-x aria-label="閉じる"></button>
@@ -904,7 +910,7 @@ document.querySelectorAll('[data-k]').forEach(a=>a.addEventListener('click',()=>
   ff.querySelector('.fmsg').style.display=t.msg?'':'none';ff.kind.value=k;$('ferr').textContent='';
   const items=(document.getElementById('sel').textContent||'').replace(/^選択中:\s*/,'');ff.items.value=k==='doc'?'':items;
   $('fsum').textContent=(k==='order'&&items)?'選んだ内容: '+items:'';
-  $('fterms').style.display=$('ftand').style.display=k==='order'?'':'none';$('fnews').classList.toggle('hid',k!=='doc');
+  $('fterms').style.display=$('ftand').style.display=$('ftermsl').style.display=$('ftandl').style.display=k==='order'?'':'none';$('fnews').classList.toggle('hid',k!=='doc');
   check();fm.classList.add('open');fm.setAttribute('aria-hidden','false');setTimeout(()=>ff.name.focus(),300)}
  function close(){fm.classList.remove('open');fm.setAttribute('aria-hidden','true')}
  document.addEventListener('click',e=>{const a=e.target.closest('[data-f]');if(a){e.preventDefault();open(a.dataset.f)}if(e.target.closest('[data-x]'))close()});
