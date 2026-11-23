@@ -571,7 +571,7 @@ body.vdk .hnav .hb:not(.o){background:#eef0f2;color:#1c1d21;border-color:#eef0f2
     <label class="fck" id="fnews"><input type="checkbox" name="optin"><i class="cb"><svg viewBox="0 0 16 16"><path d="M3.4 8.5l3 3 6.2-6.8"/></svg></i><span>Soku からのお知らせメールも受け取る(任意)</span></label>
     <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none">
     <input type="hidden" name="kind"><input type="hidden" name="items">
-    <button type="submit" class="btn onLight fgo" disabled><span class="fl2"><span id="fbtn">資料をメールで受け取る</span><span class="fsd">送信しています</span></span><i></i></button>
+    <button type="submit" class="btn onLight fgo" disabled><span class="fl2"><span id="fbtn">資料を受け取る</span><span class="fsd">送信しています</span></span><i></i></button>
     <p class="fhint" id="fhint">お名前・メール・同意で送信できます</p>
     <p class="ferr" id="ferr"></p>
   </form>
@@ -896,7 +896,7 @@ document.querySelectorAll('[data-k]').forEach(a=>a.addEventListener('click',()=>
  const MAIL_ENDPOINT='https://script.google.com/macros/s/AKfycbwO386N3juGK3n0aUwqWXi8iPIn6DdK8LkmVlDjM1u3DbOS0Hy8sBYYXU0w0JcoSdKj/exec';
  const FORM_ENDPOINT='https://api.web3forms.com/submit', W3F_KEY='96a315e6-fb56-4a28-a502-8173f9052797';  // Web3Forms(公開してよいキー。受信先 info@soku-design.com)
  const fm=document.getElementById('fm'),ff=document.getElementById('fform'),$=id=>document.getElementById(id);
- const T={doc:{tag:'資料請求',sub:'PDFをメールでお送りします',tt:'サービス資料のご請求',d:'料金、進め方、作例をまとめたPDF(14ページ)です。ご入力いただいたメールアドレスにお送りします。',b:'資料をメールで受け取る',msg:false,done:'資料をお送りしました。',dd:'数分たっても届かない場合は、迷惑メールのフォルダをご確認ください。',late:'資料は、1営業日以内にメールでお送りします。'},
+ const T={doc:{tag:'資料請求',sub:'PDFをメールでお送りします',tt:'サービス資料のご請求',d:'料金、進め方、作例をまとめたPDF(14ページ)です。ご入力いただいたメールアドレスにお送りします。',b:'資料を受け取る',msg:false,done:'資料をお送りしました。',dd:'数分たっても届かない場合は、迷惑メールのフォルダをご確認ください。',late:'資料は、1営業日以内にメールでお送りします。'},
   talk:{tag:'ご相談',sub:'メールでお返事します',tt:'ご相談・お問い合わせ',d:'内容を確認し、1営業日以内にメールでお返事します。打ち合わせが必要な場合は、こちらから日程をご案内します。',b:'送信する',msg:true,done:'お問い合わせを受け付けました。',dd:'1営業日以内に、メールでお返事します。受け付けの控えをお送りしました。',late:'1営業日以内に、メールでお返事します。'},
   order:{tag:'お申し込み',sub:'この内容で進めます',tt:'お申し込み',d:'お支払いのご案内とヒアリングシートを、メールでお送りします。お支払いの確認後に、ヒアリングから始めます。',b:'申し込む',msg:true,done:'お申し込みを受け付けました。',dd:'お支払いのご案内とヒアリングシートを、1営業日以内にメールでお送りします。受け付けの控えをお送りしました。',late:'お支払いのご案内とヒアリングシートを、1営業日以内にメールでお送りします。'}};
  const btn=ff.querySelector('.fgo'),hint=$('fhint');
